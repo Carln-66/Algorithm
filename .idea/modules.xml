@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Algorithm.iml" filepath="$PROJECT_DIR$/Algorithm.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MaxAverNum/MaxAverNum.iml" filepath="$PROJECT_DIR$/MaxAverNum/MaxAverNum.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SumOddSubArray/SumOddSubArray.iml" filepath="$PROJECT_DIR$/SumOddSubArray/SumOddSubArray.iml" />
-      <module fileurl="file://$PROJECT_DIR$/count-and-say/count-and-say.iml" filepath="$PROJECT_DIR$/count-and-say/count-and-say.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SparseArray/SparseArray.iml" filepath="$PROJECT_DIR$/SparseArray/SparseArray.iml" />
     </modules>
   </component>
 </project>
