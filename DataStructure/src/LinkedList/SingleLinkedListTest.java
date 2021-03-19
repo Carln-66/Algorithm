@@ -69,14 +69,101 @@ public class SingleLinkedListTest {
         singleLinkedList.optiAdd(node5);
         singleLinkedList.optiAdd(node18);
 
+        System.out.println("********************************************");
         //显示
         singleLinkedList.list();
 
+        System.out.println("********************************************");
         //测试修改节点的代码
         PersonNode personNode = new PersonNode(19, "Carl", "SS");
         singleLinkedList.update(personNode);
         //显示
         singleLinkedList.list();
+
+        System.out.println("********************************************");
+        //删除一个节点
+        singleLinkedList.del(19);
+        singleLinkedList.del(18);
+        singleLinkedList.list();
+
+        System.out.println("有效节点个数：" + SingleLinkedListTest.getLength(singleLinkedList.getHead()));
+
+        System.out.println("********************************************");
+        //测试查找倒数第k个节点
+        PersonNode test = findLastNode(singleLinkedList.getHead(), 5);
+        System.out.println(test);
+
+        System.out.println("********************************************");
+        //反转链表
+        reverseNode(singleLinkedList.getHead());
+        singleLinkedList.list();
+
+    }
+
+    //方法：获取单链表的节点的个数(如果时代头节点的链表要将头节点忽略)
+    //通过输入头节点来获取链表有效节点的个数
+    public static int getLength(PersonNode head){
+        if (head.next == null) {    //空链表
+            return 0;
+        } else {
+            int count = 0;
+            PersonNode temp = head.next;
+            //此时未统计头节点
+            while (temp != null) {
+                count++;
+                temp = temp.next;
+            }
+            return count;
+        }
+    }
+
+    //查找单链表中的倒数第k个节点
+    //思路：
+    //1. 编写一个方法，接收head节点，同时接收一个index(表示倒数第index个节点)
+    //2. 先把链表从头到尾遍历，得到一个链表的总的长度(下面的getLength可以实现)
+    //3. 得到size后，从链表的第一个开始遍历(size-index)个，就得到结果了
+    public static PersonNode findLastNode(PersonNode head, int index) {
+        //判断链表是否为空，若为空，则返回null
+        if (head.next == null) {
+            return null;
+        } else {
+            //第一次遍历，得到链表的长度
+            int length = getLength(head);
+            //第二次遍历size-length位置，即为倒数第k个节点
+            //先做一个index校验
+            if (index <= 0 || index > length) {
+                return null;
+            } else {
+                //定义一个辅助变量
+                PersonNode temp = head.next;
+                //使用for循环定位到倒数的index
+                for (int i = 0; i < length - index; i++) {
+                    temp = temp.next;
+                }
+                return temp;
+            }
+        }
+    }
+
+    //单链表反转
+    public static void reverseNode(PersonNode head){
+        //若链表为空，则直接返回
+        if (head.next == null || head.next.next == null) {
+            return;
+        }
+        //定义一个辅助的指针，辅助遍历原链表
+        PersonNode temp = head.next;
+        PersonNode next = null; //指向当前节点(temp)的下一个节点
+        PersonNode reverseHead = new PersonNode(0, "", "");
+        //遍历原来的链表，每遍历一个节点，就将其取出，并放在新的链表reverseHead的最前端
+        while (temp != null) {
+            next = temp.next;   //保存当前节点的下一个节点
+            temp.next = reverseHead.next;   //将temp的下一个节点指向新的链表的最前端
+            reverseHead.next = temp;    //将temp连接到新的链表上
+            temp = next;    //让temp后移
+        }
+        //将head.next指向reverseHead.next，实现单链表的反转
+        head.next = reverseHead.next;
     }
 }
 
@@ -84,6 +171,10 @@ public class SingleLinkedListTest {
 class SingleLinkedList{
     //先初始化头节点，头节点不能修改，并且不存放具体的数据
     private PersonNode head = new PersonNode(0, "", "");
+
+    public PersonNode getHead(){
+        return head;
+    }
 
     //添加节点到单向链表
     //思路：当不考虑编号顺序时
@@ -114,7 +205,7 @@ class SingleLinkedList{
         PersonNode temp = head;
         boolean flag = false;   //标识添加的标号是否存在，默认为false
         while(true) {
-            if (temp.next == null) {    //说明链表只有一个元素head
+            if (temp.next == null) {    //说明已经到达链表末端
                 break;
             }
             if (temp.next.no > personNode.no) {  //位置找到，在temp的后面插入
@@ -166,6 +257,30 @@ class SingleLinkedList{
         } else {    //未找到该节点信息
             System.out.printf("未能找到编号为%d的节点，无法修改\n",personNode.no);
         }
+    }
+
+    //删除节点
+    //思路：
+    //1. 同样的，head不能移动，因此需要一个temp辅助节点找到待删除节点的前一个节点
+    //2. 在比较时，temp.next.no和需要删除的节点的no比较
+    public void del(int no) {
+        PersonNode temp = head;
+        boolean flag = false;   //标识是否找到待删除节点的前一个节点
+        while (true) {
+            if (temp.next == null) {    //已经到达链表末尾
+                break;
+            }
+            if (temp.next.no == no) {
+                //找到了待删除节点的前一个节点temp
+                flag = true;
+                break;
+            }
+            temp = temp.next;
+        }
+        if (flag == false) {    //未找到
+            System.out.printf("未找到%d节点\n", no);
+        }
+        temp.next = temp.next.next;
     }
 
     //显示链表(遍历)
