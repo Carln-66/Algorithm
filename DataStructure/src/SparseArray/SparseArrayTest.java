@@ -1,5 +1,6 @@
 package SparseArray;
 
+import java.io.*;
 import java.util.Arrays;
 
 /**
@@ -112,6 +113,53 @@ public class SparseArrayTest {
                 System.out.printf("%d\t",data);
             }
             System.out.println();
+        }
+
+        ObjectOutputStream oos = null;
+        try {
+            FileOutputStream fs = new FileOutputStream("SparseArr.txt");
+            oos = new ObjectOutputStream(fs);
+            oos.writeObject(sparseArr);
+            oos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (oos!=null){
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        System.out.println("---------------------------------------");
+        System.out.println("将数组从磁盘中读入读出");
+
+        ObjectInputStream ois = null;
+        try {
+            FileInputStream fis = new FileInputStream("SparseArr.txt");
+            ois = new ObjectInputStream(fis);
+            Object object = ois.readObject();
+            int[][] arr = (int[][]) object;
+            for (int i = 0; i < arr.length; i++){
+                for (int j = 0; j < arr[i].length; j++) {
+                    System.out.print(arr[i][j] + "\t");
+                }
+                System.out.println();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (ois!=null) {
+                try {
+                    ois.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }
