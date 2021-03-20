@@ -1,5 +1,7 @@
 package LinkedList;
 
+import java.util.Stack;
+
 /**
  * @Auther: Carl
  * @Date: 2021/03/19/13:40
@@ -98,6 +100,12 @@ public class SingleLinkedListTest {
         reverseNode(singleLinkedList.getHead());
         singleLinkedList.list();
 
+        //测试逆序打印单链表
+        System.out.println("********************************************");
+        System.out.println("测试逆序打印单链表");
+        reversePrint(singleLinkedList.getHead());
+
+
     }
 
     //方法：获取单链表的节点的个数(如果时代头节点的链表要将头节点忽略)
@@ -164,6 +172,25 @@ public class SingleLinkedListTest {
         }
         //将head.next指向reverseHead.next，实现单链表的反转
         head.next = reverseHead.next;
+    }
+
+    //将链表逆序打印，但不破坏链表原有结构
+    public static void reversePrint(PersonNode head){
+        if (head.next == null) {
+            return; //空列表
+        }
+        //创建一个栈，将各个节点压入栈中
+        Stack<PersonNode> stack = new Stack<>();
+        PersonNode temp = head.next;
+        //将链表的所有节点压入栈
+        while (temp != null) {
+            stack.push(temp);
+            temp = temp.next;   //后移
+        }
+        //将栈中的节点进行打印
+        while (stack.size() > 0) {
+            System.out.println(stack.pop());    //栈的特点：先进后出
+        }
     }
 }
 
