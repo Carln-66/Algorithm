@@ -3,13 +3,13 @@ package stack;
 /**
  * @Auther: Carl
  * @Date: 2021/03/21/11:21
- * @Description:
+ * @Description:    实现公式运算
  */
 public class CalculatorTest {
     public static void main(String[] args) {
+
         //根据思路完成表达式运算
         String expression = "7-6-1-8";
-
 
         //创建两个栈，一个为数栈：存放数据；一个为符号栈：存放运算符
         ArrayStack1 numStack = new ArrayStack1(10);
