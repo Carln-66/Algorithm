@@ -24,10 +24,6 @@ public class TransferTest {
 //        System.out.println(calculate(parseSuffixExpressionList(strings)));
 
 
-        //将得到的中缀表达式对应的List -> 后缀表达式对应的list
-        //[1, +, (, (, 2, +, 3, ), *, 4, ), -, 5] -> ArrayList[1, 2, 3, +, 4, *, +, 5, -]   (消除小括号)
-
-
 
         //假定一个目标表达式
         //(3+4)*5-6 -> 3 4 + 5 * 6 -
@@ -55,7 +51,6 @@ public class TransferTest {
         do {
             //如果c为非数字，则需要加入list
             if ((c = s.charAt(i)) < 48  || (c = s.charAt(i)) > 57) {
-                System.out.println(c);
                 list.add("" + c);
                 i++;
             } else { //如果c是一个数字，考虑多位数问题
