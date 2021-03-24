@@ -1,29 +1,25 @@
 package sort;
 
-import sun.util.calendar.LocalGregorianCalendar;
-
-import java.sql.Date;
-import java.util.Arrays;
-
 /**
  * @Auther: Carl
  * @Date: 2021/03/24/19:54
- * @Description:
+ * @Description:  冒泡排序
  */
-public class BubbleSort {
+public class BubbleSortTest {
     public static void main(String[] args) {
 
 //        int[] arr = {-5, 7, 25, 2, -9, 14};
-//        BubbleSort.bubbleSort(arr);
+//        BubbleSortTest.bubbleSort(arr);
 
         //测试冒泡排序的时间复杂度O(n^2)，随即创建80000个随机数据的数组
-        int[] arr = new int[80000];
-        for (int i = 0; i < 80000; i++) {
-            arr[i] = (int) (Math.random() * 80000); //数据生成区间[0, 80000)
+        int[] arr = new int[100000];
+        for (int i = 0; i < 100000; i++) {
+            arr[i] = (int) (Math.random() * 100000); //数据生成区间[0, 100000)
         }
 
+        //排序100000条数据用时14733
         long t1 = System.currentTimeMillis();
-        BubbleSort.bubbleSort(arr);
+        BubbleSortTest.bubbleSort(arr);
         long t2 = System.currentTimeMillis();
         System.out.println(t2 - t1);
     }
