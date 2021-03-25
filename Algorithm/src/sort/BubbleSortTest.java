@@ -14,7 +14,7 @@ public class BubbleSortTest {
         //测试冒泡排序的时间复杂度O(n^2)，随即创建80000个随机数据的数组
         int[] arr = new int[100000];
         for (int i = 0; i < 100000; i++) {
-            arr[i] = (int) (Math.random() * 100000); //数据生成区间[0, 100000)
+            arr[i] = (int) (Math.random() * 800000); //数据生成区间[0, 100000)
         }
 
         //排序100000条数据用时14733
