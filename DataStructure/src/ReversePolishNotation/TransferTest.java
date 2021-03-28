@@ -130,7 +130,7 @@ public class TransferTest {
 
     public static int calculate(List<String> ls) {
         //创建一个栈（只需要一个栈即可）
-        Stack<String> stack = new Stack<String>();
+        Stack<String> stack = new Stack<>();
         //遍历ls
         for (String item : ls) {
             //这里使用正则表达式取出数
