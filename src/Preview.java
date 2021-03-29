@@ -1,58 +1,55 @@
-package day01;
-
 import java.util.Stack;
 
 /**
  * @Auther: Carl
- * @Date: 2021/03/28/8:50
- * @Description: LeetCode #224 基本计算器(不考虑乘除和小数)
+ * @Date: 2021/03/29/18:18
+ * @Description:
  */
-public class LeetCode_224 {
+public class Preview {
 
     public static void main(String[] args) {
-        String s = "30";
-        System.out.println(LeetCode_224.calculate(s));
+        String s = "-    (1 -3)+2-4+((1+1)-1)";
+        System.out.println(solution(s));
 
     }
 
-
-    public static int calculate(String s) {
+    public static int solution(String s){
         Stack<Integer> numStack = new Stack<>();
         Stack<Integer> operatorStack = new Stack<>();
-        char[] chars = s.toCharArray();
+
         int len = s.length();
+        char[] chars = s.toCharArray();
         int result = 0;
-        int sign = 1;
+        int operator = 1;
+
 
         for (int i = 0; i < len; i++) {
-            //考虑空格
+            //空串
             if (chars[i] == ' ') {
                 continue;
             }
-            //考虑运算符
+            //基本运算符
             if (chars[i] == '+' || chars[i] == '-') {
-                sign = chars[i] == '+' ? 1 : -1;
+                operator = chars[i] == '+' ? 1 : -1;
             }
-            //考虑数字
+            //数字
             else if (chars[i] >= '0' && chars[i] <= '9') {
-                //需要考虑数字的长度
                 int num = chars[i] - '0';
                 while (i < len - 1 && chars[i + 1] >= '0' && chars[i + 1] <= '9') {
                     num = num * 10 + chars[++i] - '0';
                 }
-                //存入结果
-                result = sign * num + result;
+                result = num * operator + result;
             }
-            //考虑左括号，进栈
+            //“（”
             else if (chars[i] == '(') {
                 numStack.push(result);
-                operatorStack.push(sign);
+                operatorStack.push(operator);
                 result = 0;
-                sign = 1;
+                operator = 1;
             }
-            //考虑右括号
+            //")"
             else {
-                result = numStack.pop() + operatorStack.pop() * result;
+                result = operatorStack.pop() * result + numStack.pop();
             }
         }
         return result;

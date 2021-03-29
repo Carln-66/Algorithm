@@ -1,4 +1,4 @@
-package day01;
+package LeetCodeTest.stack;
 
 
 import java.util.Stack;
