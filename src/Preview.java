@@ -5,52 +5,46 @@
  */
 public class Preview {
 
-    public static void main(String[] args) {
-        String s = "()))";
-        System.out.println(solution(s));
-        System.out.println(10 / 10);
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        int carry = 0;
+        ListNode result = new ListNode(-1);
+        ListNode head = result;
 
+        while (l1 != null || l2 != null) {
+            int x = l1 == null ? 0 : l1.val;
+            int y = l2 == null ? 0 : l2.val;
+            int sum = x + y + carry;
+
+            carry = sum > 9 ? 1 : 0;
+            sum = sum % 10;
+            result.next = new ListNode(sum);
+            result = result.next;
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                l2 = l2.next;
+            }
+        }
+        if (carry == 1) {
+            result.next = new ListNode(1);
+        }
+        return head.next;
+    }
+}
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode() {
     }
 
-    public static int solution(String s) {
-        int len = s.length();
-        char[] chars = s.toCharArray();
-        int left = 0;
-        int right = 0;
-        int result = 0;
+    ListNode(int val) {
+        this.val = val;
+    }
 
-        for (int i = 0; i < len; i++) {
-            if (right > left) {
-                left = 0;
-                right = 0;
-            }
-            if (chars[i] == '(') {
-                left++;
-            } else {
-                right++;
-            }
-            if (left == right) {
-                result = right * 2;
-            }
-        }
-
-        left = 0;
-        right = 0;
-
-        for (int i = len - 1; i >= 0; i--) {
-            if (left > right) {
-                left = 0;
-                right = 0;
-            }
-            if (chars[i] == '(') {
-                left++;
-            } else {
-                right++;
-            }
-            if (left == right) {
-                result = right * 2;
-            }
-        }
-        return result;
+    ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
     }
 }
