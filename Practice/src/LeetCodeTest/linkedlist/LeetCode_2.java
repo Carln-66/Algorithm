@@ -21,7 +21,8 @@ public class LeetCode_2 {
 
         listNode4.next = listNode5;
         listNode5.next = listNode6;
-        ListNode listNode = LeetCode_2.addTwoNumbers(listNode1, listNode4);
+        ListNodeService listNodeService = new ListNodeService();
+        listNodeService.list(LeetCode_2.addTwoNumbers(listNode1, listNode4));
 
     }
 
@@ -52,7 +53,6 @@ public class LeetCode_2 {
         }
         return head.next;
     }
-
 }
 
 class ListNode {
