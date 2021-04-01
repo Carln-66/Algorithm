@@ -12,7 +12,6 @@ public class LeetCode_224 {
     public static void main(String[] args) {
         String s = "30";
         System.out.println(LeetCode_224.calculate(s));
-
     }
 
 

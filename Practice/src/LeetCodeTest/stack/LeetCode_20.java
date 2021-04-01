@@ -13,7 +13,6 @@ class LeetCode_20 {
 
         String s = "{}{";
         System.out.println(LeetCode_20.result(s));
-
     }
 
     public static boolean result(String s) {
