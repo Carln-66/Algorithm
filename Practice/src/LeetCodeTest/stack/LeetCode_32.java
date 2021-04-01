@@ -14,7 +14,6 @@ public class LeetCode_32 {
         System.out.println(solution2(s));
     }
 
-
     /*
     栈方法概述：遍历char数组，若遇到"("则将其下标入栈，若遇到")"，若当前栈为空，则将该下标入栈，若不为空，比较和之前遍历的最大字符串长度，最后返回最大值
 

@@ -1,7 +1,5 @@
 package LeetCodeTest.linkedlist;
 
-import org.junit.Test;
-
 /**
  * @Auther: Carl
  * @Date: 2021/03/30/20:08

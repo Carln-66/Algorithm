@@ -1,37 +1,56 @@
+import java.util.Stack;
+
 /**
  * @Auther: Carl
  * @Date: 2021/03/29/18:18
  * @Description:
  */
 public class Preview {
+    public static void main(String[] args) {
+        String s = "(1+5  ) -( 2-1)+(1+1+1-5)";
+        System.out.println(Preview.calculate(s));
+    }
 
-    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        int carry = 0;
-        ListNode result = new ListNode(-1);
-        ListNode head = result;
+    public static int calculate(String s) {
+        char[] chars = s.toCharArray();
+        Stack<Integer> numStack = new Stack<>();
+        Stack<Integer> operatorStack = new Stack<>();
+        int len = s.length();
+        int operator = 1;
+        int res = 0;
 
-        while (l1 != null || l2 != null) {
-            int x = l1 == null ? 0 : l1.val;
-            int y = l2 == null ? 0 : l2.val;
-            int sum = x + y + carry;
-
-            carry = sum > 9 ? 1 : 0;
-            sum = sum % 10;
-            result.next = new ListNode(sum);
-            result = result.next;
-            if (l1 != null) {
-                l1 = l1.next;
+        for (int i = 0; i < len; i++) {
+            if (chars[i] == ' ') {
+                continue;
             }
-            if (l2 != null) {
-                l2 = l2.next;
+            //考虑数字
+            if (chars[i] >= '0' && chars[i] <= '9') {
+                int num = chars[i] - '0';
+                while (i < len - 1 && chars[i + 1] >= '0' && chars[i + 1] <= '9') {
+                    num = chars[i] * 10 + chars[++i] - '0';
+                }
+                res = num * operator + res;
+            }
+            //考虑运算符
+            else if (chars[i] == '+' || chars[i] == '-') {
+                operator = chars[i] == '+' ? 1 : -1;
+            }
+            //考虑左括号
+            else if (chars[i] == '(') {
+                numStack.push(res);
+                operatorStack.push(operator);
+                res = 0;
+                operator = 1;
+            }
+            else  {
+                res = numStack.pop() + res * operatorStack.pop();
             }
         }
-        if (carry == 1) {
-            result.next = new ListNode(1);
-        }
-        return head.next;
+        return res;
     }
 }
+
+
 class ListNode {
     int val;
     ListNode next;

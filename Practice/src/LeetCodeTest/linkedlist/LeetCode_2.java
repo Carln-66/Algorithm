@@ -1,7 +1,5 @@
 package LeetCodeTest.linkedlist;
 
-import org.junit.Test;
-
 /**
  * @Auther: Carl
  * @Date: 2021/03/30/23:41
@@ -38,7 +36,6 @@ public class LeetCode_2 {
     }
 }
 
-//定义一个PersonNode，每一个PersonNode对象就是一个节点
 class ListNode {
     int val;
     ListNode next;
@@ -54,5 +51,4 @@ class ListNode {
         this.val = val;
         this.next = next;
     }
-
 }
