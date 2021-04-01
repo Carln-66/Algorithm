@@ -8,9 +8,6 @@ import org.junit.Test;
  * @Description: LeetCode #206 链表反转
  */
 public class LeetCode_206 {
-
-
-
     class Solution {
         //利用头插法
         public ListNode reverseList(ListNode head) {
@@ -35,7 +32,6 @@ public class LeetCode_206 {
             head.next = null;
             return nextNode;
         }
-
     }
 
     public static class ListNode {

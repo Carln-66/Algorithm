@@ -9,25 +9,6 @@ import org.junit.Test;
  */
 public class LeetCode_2 {
 
-    @Test
-    public void test() {
-
-        ListNode listNode1 = new ListNode(9);
-        ListNode listNode2 = new ListNode(9);
-        ListNode listNode3 = new ListNode(9);
-        listNode1.add(listNode2);
-        listNode1.add(listNode3);
-
-        ListNode listNode4 = new ListNode(9);
-        ListNode listNode5 = new ListNode(9);
-        ListNode listNode6 = new ListNode(9);
-        listNode4.add(listNode4);
-        listNode4.add(listNode5);
-        listNode4.add(listNode6);
-
-        addTwoNumbers(listNode1, listNode4).list();
-    }
-
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode head = new ListNode(0);
         ListNode temp = head;
@@ -61,8 +42,6 @@ public class LeetCode_2 {
 class ListNode {
     int val;
     ListNode next;
-    ListNode head = new ListNode();
-
 
     ListNode() {
     }
@@ -76,24 +55,4 @@ class ListNode {
         this.next = next;
     }
 
-    public void list() {
-        ListNode temp = head;
-        while (true) {
-            if (temp == null) {
-                break;
-            }
-            System.out.println(temp);
-            temp = temp.next;
-        }
-    }
-
-    public void add(ListNode listNode) {
-        while (true) {
-            if (listNode.next == null) {
-                break;
-            }
-            listNode = listNode.next;
-        }
-        listNode.next = listNode;
-    }
 }
