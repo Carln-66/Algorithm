@@ -12,7 +12,6 @@ public class offer_54 {
         this.k = k;
         inOrder(root);
         return res;
-
     }
 
     void inOrder(TreeNode root) {
@@ -27,7 +26,6 @@ public class offer_54 {
             res = root.val;
         }
         inOrder(root.left);
-        return;
     }
 }
 
