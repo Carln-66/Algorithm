@@ -9,7 +9,7 @@ import java.util.Queue;
  * @Date: 2021/04/05/19:31
  * @Description: 剑指offer  #55-i  二叉树的深度
  */
-public class offer55_i {
+public class offer_55_i {
 
     //递归解法
     public int maxDepth(TreeNode root) {
