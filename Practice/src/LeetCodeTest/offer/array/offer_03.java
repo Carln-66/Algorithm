@@ -3,7 +3,7 @@ package LeetCodeTest.offer.array;
 /**
  * @Auther: Carl
  * @Date: 2021/04/02/22:22
- * @Description: 力扣剑指offer  #03     数组中重复的数字
+ * @Description: 力扣剑指offer  #03  数组中重复的数字
  */
 public class offer_03 {
 

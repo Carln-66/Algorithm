@@ -4,44 +4,33 @@
  * @Description:
  */
 public class Preview {
-
-    public ListNode rotateRight(ListNode head, int k) {
-        if (head == null || head.next == null) {
-            return head;
+    public boolean findNumberIn2DArray(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return false;
         }
-        int count = 0;
-        ListNode temp = head;
-        while (temp.next != null) {
-            count++;
-            temp = temp.next;
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        int row = 0;
+        int column = columns - 1;
+        while (row < rows && column >= 0) {
+            if (target > matrix[row][column]) {
+                row++;
+            } else if (target < matrix[row][column]){
+                column--;
+            } else {
+                return true;
+            }
         }
-        int pos = (count - 1) - k % count;
-        temp.next = head;
-        ListNode tail = head;
-        for (int i = 0; i < pos; i++) {
-            tail = tail.next;
-            head = tail;
-        }
-        head = tail.next;
-        tail.next = null;
-        return head;
+        return false;
     }
 }
 
-
-class ListNode {
+class TreeNode {
     int val;
-    ListNode next;
+    TreeNode left;
+    TreeNode right;
 
-    ListNode() {
-    }
-
-    ListNode(int val) {
-        this.val = val;
-    }
-
-    ListNode(int val, ListNode next) {
-        this.val = val;
-        this.next = next;
+    TreeNode(int x) {
+        val = x;
     }
 }
