@@ -4,33 +4,17 @@
  * @Description:
  */
 public class Preview {
-    public boolean findNumberIn2DArray(int[][] matrix, int target) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return false;
+    public int fib(int n) {
+        if (n == 0) {
+            return 0;
         }
-        int rows = matrix.length;
-        int columns = matrix[0].length;
-        int row = 0;
-        int column = columns - 1;
-        while (row < rows && column >= 0) {
-            if (target > matrix[row][column]) {
-                row++;
-            } else if (target < matrix[row][column]){
-                column--;
-            } else {
-                return true;
-            }
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+        dp[1] = 1;
+        for (int i = 2; i < n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+            dp[i] %= 1000000007;
         }
-        return false;
-    }
-}
-
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode(int x) {
-        val = x;
+        return dp[n];
     }
 }
