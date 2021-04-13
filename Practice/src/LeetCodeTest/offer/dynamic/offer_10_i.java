@@ -1,4 +1,4 @@
-package LeetCodeTest.offer;
+package LeetCodeTest.offer.dynamic;
 
 /**
  * @Auther: Carl
