@@ -5,7 +5,7 @@ package LeetCodeTest.offer;
  * @Date: 2021/04/08/23:20
  * @Description: 剑指offer #10-i   斐波那契数列
  */
-public class offer_1_i {
+public class offer_10_i {
     //利用动态规划
     public int fib(int n) {
         if (n == 0) {
