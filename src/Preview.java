@@ -4,17 +4,32 @@
  * @Description:
  */
 public class Preview {
-    public int fib(int n) {
-        if (n == 0) {
-            return 0;
+
+    public void quickSort(int[] arr, int left, int right) {
+        if (left >= right) {
+            return;
         }
-        int[] dp = new int[n + 1];
-        dp[0] = 0;
-        dp[1] = 1;
-        for (int i = 2; i < n; i++) {
-            dp[i] = dp[i - 1] + dp[i - 2];
-            dp[i] %= 1000000007;
+        int l = left;
+        int r = right;
+        int pivot = arr[l];
+        while (l < r) {
+            while (l < r && arr[r] > pivot) {
+                r--;
+            }
+            if (l < r) {
+                arr[l] = arr[r];
+            }
+            while (l < r && arr[l] < pivot) {
+                l++;
+            }
+            if (l < r) {
+                arr[r] = arr[l];
+            }
+            if (l >= r) {
+                arr[l] = pivot;
+            }
         }
-        return dp[n];
+        quickSort(arr, left, r - 1);
+        quickSort(arr, l + 1, right);
     }
 }
