@@ -85,7 +85,7 @@ public class MergeSortTest {
             i++;
         }
 
-        while (j <= right) {  //表示左侧数组元素还有剩余
+        while (j <= right) {  //表示右侧数组元素还有剩余
             temp[t] = arr[j];
             t++;
             j++;
