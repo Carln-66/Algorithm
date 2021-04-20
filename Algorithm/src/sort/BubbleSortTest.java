@@ -24,11 +24,11 @@ public class BubbleSortTest {
         System.out.println(t2 - t1);
     }
 
-    public static void bubbleSort(int[] arr){
+    public static void bubbleSort(int[] arr) {
         //第一次循环，将数组中最大的数字排在最后
         int temp = 0;   //temp用来辅助交换顺序
         boolean flag = false;   //表示是否进行过交换
-        for (int i = 0; i < arr.length - 1 ; i++) {
+        for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length - 1 - i; j++) {
                 //若前面数字比后面大，则将其交换
                 if (arr[j] > arr[j + 1]) {
@@ -42,6 +42,29 @@ public class BubbleSortTest {
                 break;
             } else {
                 flag = false;   //结束当次循环后flag若进行过交换则仍为true，需要重置false以进入下一次循环
+            }
+        }
+    }
+
+    public static void sortPlus(int[] arr) {
+        if (arr != null && arr.length > 1) {
+            for (int i = 0; i < arr.length - 1; i++) {
+                // 初始化一个布尔值
+                boolean flag = true;
+                for (int j = 0; j < arr.length - i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        // 调换
+                        int temp;
+                        temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                        // 改变flag
+                        flag = false;
+                    }
+                }
+                if (flag) {
+                    break;
+                }
             }
         }
     }
