@@ -1,6 +1,5 @@
 package linkedlist;
 
-import org.junit.Test;
 
 /**
  * @Auther: Carl
