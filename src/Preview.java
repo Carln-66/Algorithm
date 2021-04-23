@@ -5,18 +5,21 @@
  */
 public class Preview {
     public void BubbleSort(int[] arr) {
-        for (int i = 0; i < arr.length - 1; i++) {
-            boolean flag = true;
-            for (int j = 0; j < arr.length - 1; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    int temp = arr[j];
-                    arr[j + 1] = arr[j];
-                    arr[j + 1] = temp;
-                    flag = false;
+        if (arr != null && arr.length > 1) {
+            for (int i = 0; i < arr.length - 1; i++) {
+                boolean flag = true;
+                for (int j = 0; j < arr.length - i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        int temp;
+                        temp = arr[j];
+                        arr[j + 1] = arr[j];
+                        arr[j + 1] = temp;
+                        flag = false;
+                    }
                 }
-            }
-            if (flag) {
-                break;
+                if (flag) {
+                    break;
+                }
             }
         }
     }
@@ -28,16 +31,16 @@ public class Preview {
         int r = right;
         int pivot = arr[l];
         while (l < r) {
-            while (l < r && arr[r] >= pivot) {
+            while (l < r && arr[r] > pivot) {
                 r--;
             }
             if (arr[r] < pivot) {
                 arr[l] = arr[r];
             }
-            while (l < r && arr[l] <= pivot) {
+            while (l < r && arr[l] < pivot) {
                 l++;
             }
-            if (arr[l] > pivot) {
+            if (arr[l] < pivot) {
                 arr[r] = arr[l];
             }
             if (arr[l] >= arr[r]) {
@@ -50,9 +53,9 @@ public class Preview {
 
     public void insertSort(int[] arr) {
         for (int i = 1; i < arr.length; i++) {
-            int index = i - 1;
+            int index = arr.length - 1;
             int value = arr[i];
-            while (index >= 0 && arr[index] > value) {
+            while (index >= 0 && value > arr[index]) {
                 arr[index + 1] = arr[index];
                 index--;
             }
@@ -74,9 +77,8 @@ public class Preview {
         int l = left;
         int r = right;
         int k = 0;
-
-        while (l <= mid && r <= right) {
-            if (arr[l] < arr[r]) {
+        while (arr[l] <= mid && arr[r] <= right) {
+            if (arr[l] < mid) {
                 temp[k++] = arr[l++];
             } else {
                 temp[k++] = arr[r++];
@@ -88,7 +90,7 @@ public class Preview {
         }
 
         while (r <= right) {
-            temp[k++] = arr[r++];
+            arr[k++] = arr[r];
         }
 
         for (int i = 0; i < temp.length; i++) {
