@@ -5,9 +5,9 @@
  */
 public class Preview {
     public void BubbleSort(int[] arr) {
-        for (int i = 0; i < arr.length - 1; i++) {
+        for (int i = 0; i < arr.length; i++) {
             boolean flag = true;
-            for (int j = 0; j < arr.length - 1; j++) {
+            for (int j = 0; j < arr.length; j++) {
                 if (arr[j] > arr[j + 1]) {
                     int temp = arr[j];
                     arr[j] = arr[j + 1];
@@ -28,19 +28,19 @@ public class Preview {
         int r = right;
         int pivot = arr[l];
         while (l < r) {
-            while (l < r && arr[r] > pivot) {
+            while (l < r && arr[r] >= pivot) {
                 r--;
             }
             if (arr[r] < pivot) {
                 arr[l] = arr[r];
             }
-            while (l < r && arr[l] < pivot) {
+            while (l < r && arr[l] <= pivot) {
                 l++;
             }
             if (arr[l] > pivot) {
                 arr[r] = arr[l];
             }
-            if (arr[l] >= arr[r]) {
+            if (l >= r) {
                 arr[l] = pivot;
             }
         }
@@ -52,7 +52,7 @@ public class Preview {
         for (int i = 1; i < arr.length; i++) {
             int index = i - 1;
             int value = arr[i];
-            while (index >= 0 && value <= arr[index]) {
+            while (index >= 0 && value < arr[index]) {
                 arr[index + 1] = arr[index];
                 index--;
             }
@@ -61,8 +61,8 @@ public class Preview {
     }
 
     public void mergeSort(int[] arr, int left, int right) {
+        int mid = left + (right - left) / 2;
         if (left < right) {
-            int mid = left + (right - left) / 2;
             mergeSort(arr, left, mid);
             mergeSort(arr, mid + 1, right);
             merge(arr, left, mid, right);
@@ -72,9 +72,9 @@ public class Preview {
     private static void merge(int[] arr, int left, int mid, int right) {
         int[] temp = new int[right - left + 1];
         int l = left;
-        int r = mid + 1;
+        int r = right + 1;
         int k = 0;
-        while (l <= mid && r <= right) {
+        while (arr[l] <= mid && arr[r] <= right) {
             if (arr[l] < arr[r]) {
                 temp[k++] = arr[l++];
             } else {
@@ -90,7 +90,7 @@ public class Preview {
             temp[k++] = arr[r++];
         }
 
-        for (int i = 0; i < temp.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             arr[left + i] = temp[i];
         }
     }
