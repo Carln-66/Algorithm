@@ -9,7 +9,7 @@ import java.util.Queue;
  * @Description: #37 序列化二叉树
  */
 public class offer_37 {
-    // Encodes a tree to a single string.
+    // Encodes a tree to a single LeetCode_415.
     public String serialize(TreeNode root) {
         if (root == null) {
             return "[]";
