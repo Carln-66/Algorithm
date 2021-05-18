@@ -1,5 +1,7 @@
 package linkedlist;
 
+import java.util.List;
+
 /**
  * @Auther: Carl
  * @Date: 2021/03/30/20:08
@@ -29,6 +31,19 @@ public class LeetCode_206 {
             head.next.next = head;
             head.next = null;
             return nextNode;
+        }
+
+        //双指针迭代
+        public ListNode reverseList3(ListNode head) {
+            ListNode pre = null;
+            ListNode cur = head;
+            while (cur != null) {
+                ListNode temp = cur.next;
+                cur.next = pre;
+                pre = cur;
+                cur = temp;
+            }
+            return pre;
         }
     }
 
