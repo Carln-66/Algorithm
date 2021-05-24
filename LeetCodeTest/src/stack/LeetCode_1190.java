@@ -14,9 +14,9 @@ public class LeetCode_1190 {
         Stack<Character> stack = new Stack<>();
         char[] chars = s.toCharArray();
         StringBuilder res = new StringBuilder();
-        for (int i = 0; i < chars.length; i++) {
-            if (chars[i] != ')') {
-                stack.push(chars[i]);
+        for (char aChar : chars) {
+            if (aChar != ')') {
+                stack.push(aChar);
             } else {
                 List<Character> list = new ArrayList<>();
                 while (!(stack.peek() == '(')) {
