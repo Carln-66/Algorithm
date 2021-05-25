@@ -1,9 +1,9 @@
-package string;
+package strings;
 
 /**
  * @Auther: Carl
  * @Date: 2021/05/17/22:22
- * @Description:
+ * @Description: 字符串相加
  */public class LeetCode_415 {
     public String addStrings(String num1, String num2) {
         StringBuilder res = new StringBuilder();

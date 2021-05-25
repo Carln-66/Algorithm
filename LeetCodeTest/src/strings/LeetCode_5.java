@@ -9,7 +9,7 @@ public class LeetCode_5 {
     public String longestPalindrome(String s) {
         int len = s.length();
         if (len < 2) {
-            return null;
+            return s;
         }
         int maxLen = 1;
         int begin = 0;
@@ -46,5 +46,37 @@ public class LeetCode_5 {
             }
         }
         return s.substring(begin, begin + maxLen);
+    }
+
+    //中心扩散法
+    public String longestPalindrome1(String s) {
+        if (s == null || s.length() < 1) {
+            return "";
+        }
+        int start = 0;
+        int end = 0;
+        for (int i = 0; i < s.length(); i++) {
+            //判断回文子串是奇数的情况
+            int odd = expandAroundCentre(s, i, i);
+            //判断回文子串是偶数的情况
+            int even = expandAroundCentre(s, i, i + 1);
+            //奇偶中取较大值
+            int len = Math.max(odd, even);
+            //若以当前字符为中心的回文子串长度大于前一个结果，更新起始位置
+            if (len > end - start) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
+            }
+        }
+        return s.substring(start, end + 1);
+    }
+
+    //返回回文子串的长度
+    private int expandAroundCentre(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            --left;
+            ++right;
+        }
+        return right - left - 1;
     }
 }
