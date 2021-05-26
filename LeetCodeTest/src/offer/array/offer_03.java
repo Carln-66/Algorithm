@@ -6,7 +6,7 @@ package offer.array;
  * @Description: 力扣剑指offer  #03  数组中重复的数字
  */
 public class offer_03 {
-
+    //原地交换的思想
     public int findRepeatNumber(int[] nums) {
         int temp = 0;
         for (int i = 0; i < nums.length; i++) {
