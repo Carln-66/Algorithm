@@ -1,5 +1,3 @@
-import sun.reflect.generics.tree.Tree;
-
 import java.util.*;
 
 /**
@@ -178,7 +176,112 @@ public class Practice {
         return root;
     }
 
+    public int[] spiralOrder(int[][] matrix) {
+        if (matrix.length == 0) return new int[0];
+        int top = 0, below = matrix.length - 1, left = 0, right = matrix[0].length - 1;
+        int x = 0;
+        int[] res = new int[(right + 1) * (below + 1)];
+        while (true) {
+            for (int i = left; i <= right; i++) {
+                res[x++] = matrix[top][i];
+            }
+            if (++top > below) break;
+            for (int i = top; i <= below; i++) {
+                res[x++] = matrix[i][right];
+            }
+            if (left > --right) break;
+            for (int i = right; i >= left; i--) {
+                res[x++] = matrix[below][i];
+            }
+            if (top > --below) break;
+            for (int i = below; i >= top; i--) {
+                res[x++] = matrix[i][left];
+            }
+            if (++left > right) break;
+        }
+        return res;
+    }
 
+    public int minArray(int[] numbers) {
+        int left = 0;
+        int right = numbers.length - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (numbers[mid] > numbers[right]) {
+                left = mid + 1;
+            } else if (numbers[mid] < numbers[right]) {
+                right = mid;
+            } else {
+                right--;
+            }
+        }
+        return numbers[left];
+    }
+
+    public boolean findNumberIn2DArray(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return false;
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        int row = 0;
+        int column = matrix[0].length - 1;
+        while (row < rows && column >= 0) {
+            if (matrix[row][column] < target) {
+                row++;
+            } else if (matrix[row][column] > target) {
+                column--;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int[] reversePrint(ListNode head) {
+        Stack<Integer> stack = new Stack<>();
+        ListNode temp = head;
+        int len = 0;
+        while (temp != null) {
+            len++;
+            temp = temp.next;
+        }
+        int[] res = new int[len];
+        while (head != null) {
+            stack.push(head.val);
+            head = head.next;
+        }
+        for (int i = 0; i < len; i++) {
+            res[i] = stack.pop();
+        }
+        return res;
+    }
+
+    public int fib(int n) {
+        if (n == 0) return 0;
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+        dp[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+            dp[i] %= 1000000007;
+        }
+        return dp[n];
+    }
+
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        int res = 0, temp = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int j = map.getOrDefault(s.charAt(i), -1);
+            map.put(s.charAt(i), i);
+            temp = temp < i - j ? temp + 1 : i - j;
+            res = Math.max(temp, res);
+        }
+        return res;
+    }
+
+    public int numWays(int n) {
+
+    }
 }
 
 class CQueue {
