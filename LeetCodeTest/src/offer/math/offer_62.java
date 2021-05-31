@@ -7,17 +7,15 @@ package offer.math;
  */
 public class offer_62 {
     //数学解法
-
     /**
      * @param n 数长
      * @param m 每隔m个取出数字
      */
     public int lastRemaining(int n, int m) {
         int res = 0;
-        for (int i = 2; i < n; i++) {
+        for (int i = 2; i <= n; i++) {
             res = (res + m) % i;
         }
         return res;
     }
-
 }

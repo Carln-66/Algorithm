@@ -319,6 +319,50 @@ public class Practice {
         }
         return res;
     }
+
+    public int translateNum(int num) {
+        if (num <= 9) return 1;
+        int end = num % 100;
+        if (end <= 9 || end >= 26) {
+            return translateNum(num / 10);
+        } else {
+            return translateNum(num / 100) + translateNum(num / 10);
+        }
+    }
+
+    public int lastRemaining(int n, int m) {
+        int res = 0;
+        for (int i = 2; i <= n; i++) {
+            res = (res + m) % i;
+        }
+        return res;
+    }
+
+    public boolean isSubStructure(TreeNode A, TreeNode B) {
+        if (A == null || B == null) return false;
+        return isSub(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B);
+    }
+
+    private boolean isSub(TreeNode A, TreeNode B) {
+        if (B == null) {
+            return true;
+        }
+        if (A == null || A.val != B.val) {
+            return false;
+        }
+        return isSub(A.left, B.left) && isSub(A.right, B.right);
+    }
+
+    public char firstUniqChar(String s) {
+        HashMap<Character, Boolean> map = new HashMap<>();
+        for (Character c : s.toCharArray()) {
+            map.put(c, !map.containsKey(c));
+        }
+        for (Character c : s.toCharArray()) {
+            if (map.get(c)) return c;
+        }
+        return ' ';
+    }
 }
 
 class CQueue {
