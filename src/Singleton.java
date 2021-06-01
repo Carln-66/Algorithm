@@ -5,11 +5,7 @@
  */
 public class Singleton {
     private volatile static Singleton instance;
-
-    public Singleton() {
-
-    }
-
+    private Singleton(){}
     public static Singleton getInstance() {
         if (instance == null) {
             synchronized (Singleton.class) {
