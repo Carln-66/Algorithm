@@ -418,6 +418,83 @@ public class Practice {
         }
         return res.toArray(new int[res.size()][]);
     }
+
+    public int[] twoSum(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            int sum = nums[left] + nums[right];
+            if (target < sum) {
+                right--;
+            } else if (target > sum) {
+                left++;
+            } else {
+                return new int[]{nums[left], nums[right]};
+            }
+        }
+        return new int[0];
+    }
+
+    public String reverseLeftWords(String s, int n) {
+        String s1 = s.substring(0, n);
+        String s2 = s.substring(n, s.length());
+        return s2 + s1;
+    }
+
+    public TreeNode mirrorTree(TreeNode root) {
+        if (root == null) return null;
+        TreeNode temp = root.left;
+        root.left = mirrorTree(root.right);
+        root.right = mirrorTree(temp);
+        return root;
+    }
+
+    LinkedList<List<Integer>> res1 = new LinkedList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+    public List<List<Integer>> pathSum(TreeNode root, int target) {
+        recur1(root, target);
+        return res1;
+    }
+
+    private void recur1(TreeNode root, int target) {
+        if (root == null) return;
+        path.add(root.val);
+        target -= root.val;
+        if (target == 0 && root.left == null && root.right == null) {
+            res1.add(new LinkedList<>(path));
+        }
+        recur1(root.left, target);
+        recur1(root.right, target);
+        path.removeLast();
+    }
+
+    public int search(int[] nums, int target) {
+        int i = 0;
+        int j = nums.length - 1;
+        while (i <= j) {
+            int mid = (i + j) / 2;
+            if (nums[mid] > target) {
+                j = mid - 1;
+            } else {
+                i = mid + 1;
+            }
+        }
+        int right = i;
+        if (i >= 0 && nums[i] != target) return 0;
+        i = 0;
+        j = nums.length - 1;
+        while (i <= j) {
+            int mid = (i + j) / 2;
+            if (nums[mid] < target) {
+                i = mid + 1;
+            } else {
+                j = mid - 1;
+            }
+        }
+        int left = j;
+        return right - left - 1;
+    }
+
+
 }
 
 class CQueue {
