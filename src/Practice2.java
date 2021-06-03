@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Auther: Carl
@@ -124,6 +121,28 @@ public class Practice2 {
             map.put(s.charAt(end), end);
         }
         return res;
+    }
+
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> cur = new ArrayList<>();
+        for (int num : nums) {
+            cur.add(num);
+        }
+        int length = nums.length;
+        dfs(res, cur, 0, length);
+        return res;
+    }
+
+    private void dfs(List<List<Integer>> res, List<Integer> cur, int first, int length) {
+        if (first == length) {
+            res.add(new ArrayList<>(cur));
+        }
+        for (int i = first; i < length; i++) {
+            Collections.swap(cur, first, i);
+            dfs(res, cur, first + 1, length);
+            Collections.swap(cur, first, i);
+        }
     }
 
 }
