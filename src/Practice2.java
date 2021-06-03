@@ -1,4 +1,7 @@
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @Auther: Carl
@@ -8,8 +11,8 @@ import java.util.HashMap;
 public class Practice2 {
 
     public static void main(String[] args) {
-        String s = "babad";
-        longestPalindrome(s);
+        String s = "dvdf";
+        lengthOfLongestSubstring(s);
     }
 
     public int[] twoSum(int[] nums, int target) {
@@ -105,6 +108,22 @@ public class Practice2 {
             dp[i] = dp[i - 1] + dp[i - 2];
         }
         return dp[n];
+    }
+
+    public static int lengthOfLongestSubstring(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        int len = s.length();
+        int res = 0;
+        int start = 0;
+        for (int end = 0; end < len; end++) {
+            char c = s.charAt(end);
+            if (map.containsKey(c)) {
+                start = Math.max(start, map.get(c) + 1);
+            }
+            res = Math.max(res, end - start + 1);
+            map.put(s.charAt(end), end);
+        }
+        return res;
     }
 
 }
