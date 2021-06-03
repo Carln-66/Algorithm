@@ -145,4 +145,35 @@ public class Practice2 {
         }
     }
 
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        char[] symbols = s.toCharArray();
+        int len = s.length();
+        if (len % 2 != 0) return false;
+        for (int i = 0; i < symbols.length; i++) {
+            if (symbols[i] == '(' || symbols[i] == '[' || symbols[i] == '{') {
+                stack.push(symbols[i]);
+            } else if (symbols[i] == ')') {
+                if (!stack.isEmpty() && stack.peek() == '(') {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            } else if (symbols[i] == ']') {
+                if (!stack.isEmpty() && stack.peek() == '[') {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            } else {
+                if (!stack.isEmpty() && stack.peek() == '{') {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
+    }
+
 }
