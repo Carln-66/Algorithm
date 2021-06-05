@@ -31,8 +31,6 @@ public class LRUCache<V> {
         head = new ListNode<>();
         tail = new ListNode<>();
         head.next = tail;
-        head.prev = null;
-        tail.next = null;
         tail.prev = head;
     }
 
@@ -48,6 +46,8 @@ public class LRUCache<V> {
         }
         node.prev.next = node.next;
         node.next.prev = node.prev;
+        head.next = node.next;
+        node.next.prev = node;
         head.next = node;
         node.prev = head;
         table.put(key, node);
@@ -58,7 +58,7 @@ public class LRUCache<V> {
         ListNode<String, V> node = table.get(key);
         if (node == null) {
             if (table.size() == capacity) {
-                table.remove(tail.prev.key);
+                table.remove(tail.prev, key);
                 tail.prev.prev.next = tail;
                 tail.next = null;
             }
@@ -68,19 +68,19 @@ public class LRUCache<V> {
             table.put(key, node);
         }
         node.value = value;
-        node.next = head.next;
-        head.next.prev = node;
-        head.next = node;
+        head.next = node.next;
+        node.next.prev = node;
         node.prev = head;
+        head.next = node;
     }
+
 
     public static class ListNode<K, V> {
         private K key;
         private V value;
         ListNode<K, V> prev;
         ListNode<K, V> next;
-
-        public ListNode() {
+        public ListNode(){
 
         }
 

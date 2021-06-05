@@ -57,23 +57,22 @@ __|     |__|                       __|  |__
     //动态规划+双指针解法
     public int trap1(int[] height) {
         int sum = 0;
-        int max_left = 0;
-        int max_right = 0;
+        int left_max = 0;
+        int right_max = 0;
         int left = 1;
         int right = height.length - 2;
         for (int i = 1; i < height.length - 1; i++) {
-            //left侧小于right侧
             if (height[left - 1] < height[right + 1]) {
-                max_left = Math.max(max_left, height[left - 1]);
-                int min = max_left;
-                if (height[i] < min) {
+                left_max = Math.max(left_max, height[left - 1]);
+                int min = left_max;
+                if (height[left] < min) {
                     sum = sum + (min - height[left]);
                 }
                 left++;
             } else {
-                max_right = Math.max(max_right, height[right + 1]);
-                int min = max_right;
-                if (height[i] < min) {
+                right_max = Math.max(right_max, height[right + 1]);
+                int min = right_max;
+                if (height[right] < min) {
                     sum = sum + (min - height[right]);
                 }
                 right--;
