@@ -1,21 +1,20 @@
+import java.util.HashMap;
+
 /**
  * @Auther: Carl
  * @Date: 2021/06/06/20:33
  * @Description: x的平方根
  */
 public class LeetCode_69 {
-    public int mySqrt(int x) {
-        int left = 0, right = x;
-        int res = -1;
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if ((long) mid * mid <= x) {
-                res = mid;
-                left = mid + 1;
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])) {
+                return new int[] {i, map.get(target - nums[i])};
             } else {
-                right = mid - 1;
+                map.put(nums[i], i);
             }
         }
-        return res;
+        return new int[0];
     }
 }
