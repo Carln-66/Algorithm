@@ -258,4 +258,19 @@ public class Practice2 {
         dfs1(cur.right, res, level + 1);
     }
 
+    public int removeDuplicates(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        int fast = 1;
+        int slow = 0;
+        while (fast < nums.length) {
+            if (nums[slow] != nums[fast]) {
+                slow++;
+                nums[slow] = nums[fast];
+
+            }
+            fast++;
+        }
+        return slow + 1;
+    }
+
 }

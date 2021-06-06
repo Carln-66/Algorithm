@@ -11,7 +11,6 @@ public class LeetCode_88 {
         int cur = 0;
         int temp1 = 0;
         int temp2 = 0;
-        int minLen = Math.min(m, n);
         while (temp1 < m || temp2 < n) {
             if (temp1 == m) {
                 cur = nums2[temp2++];
