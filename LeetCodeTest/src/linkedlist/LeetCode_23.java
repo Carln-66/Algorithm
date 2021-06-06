@@ -37,4 +37,41 @@ public class LeetCode_23 {
         pointer.next = aPointer == null ? bPointer : aPointer;
         return head.next;
     }
+
+    public ListNode mergeKLists1(ListNode[] lists) {
+        return merge1(lists, 0, lists.length - 1);
+    }
+
+    private ListNode merge1(ListNode[] lists, int left, int right) {
+        if (left == right) {
+            return lists[left];
+        }
+        if (lists == null) {
+            return null;
+        }
+        int mid = (left + right) >> 1;
+        return mergeTwoLists(merge1(lists, left, mid), merge1(lists, mid + 1, right));
+    }
+
+    private ListNode mergeTwoLists1(ListNode l1, ListNode l2) {
+        if (l1 == null || l2 == null) {
+            return l1 == null ? l2 : l1;
+        }
+        ListNode head = new ListNode(0);
+        ListNode tail = head;
+        ListNode node1 = l1;
+        ListNode node2 = l2;
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                tail.next = l1;
+                l1 = l1.next;
+            } else {
+                tail.next = l2;
+                l2 = l2.next;
+            }
+            tail = tail.next;
+        }
+        tail.next = l1 != null ? l1 : l2;
+        return head.next;
+    }
 }

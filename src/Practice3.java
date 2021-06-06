@@ -8,25 +8,25 @@ import java.util.List;
  * @Description:
  */
 public class Practice3 {
-    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
-        dfs(root, res, 0);
-        return res;
-    }
-
-    private void dfs(TreeNode cur, List<List<Integer>> res, int level) {
-        if (cur == null) return;
-        if (res.size() <= level) {
-            LinkedList<Integer> newLevel = new LinkedList<>();
-            res.add(newLevel);
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if (l1 == null || l2 == null) {
+            return l1 == null ? l2 : l1;
         }
-        List<Integer> list = res.get(level);
-        if (level % 2 == 0) {
-            list.add(cur.val);
-        } else {
-            list.add(0, cur.val);
+        ListNode head = new ListNode(0);
+        ListNode tail = head;
+        ListNode pointer1 = l1;
+        ListNode pointer2 = l2;
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                tail.next = l1;
+                l1 = l1.next;
+            } else {
+                tail.next = l2;
+                l2 = l2.next;
+            }
+            tail = tail.next;
         }
-        dfs(cur.left, res, level + 1);
-        dfs(cur.right, res, level + 1);
+        tail.next = l1 != null ? l1 : l2;
+        return head.next;
     }
 }
