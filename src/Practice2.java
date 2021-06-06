@@ -235,4 +235,27 @@ public class Practice2 {
         }
         return step;
     }
+
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        dfs1(root, res, 0);
+        return res;
+    }
+
+    private void dfs1(TreeNode cur, List<List<Integer>> res, int level) {
+        if (cur == null) return;
+        if (res.size() <= level) {
+            LinkedList<Integer> newLevel = new LinkedList<>();
+            res.add(newLevel);
+        }
+        List<Integer> list = res.get(level);
+        if (level % 2 == 0) {
+            list.add(cur.val);
+        } else {
+            list.add(0, cur.val);
+        }
+        dfs1(cur.left, res, level + 1);
+        dfs1(cur.right, res, level + 1);
+    }
+
 }

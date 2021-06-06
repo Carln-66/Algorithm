@@ -9,22 +9,26 @@ import java.util.Arrays;
  */
 public class QuickSortTest {
     public static void main(String[] args) {
-//        int[] arr = {11, -1, 0, -5, 7, 25, 2, -9, 14};
+        int[] arr = {11, -1, 0, -5, 7, 25, 2, -9, 14};
 //        QuickSortTest quickSortTest = new QuickSortTest();
 //        quickSortTest.quickSort(arr, 0, arr.length - 1);
 //        System.out.println(Arrays.toString(arr));
 
         //测试希尔排序移位法随机创建100000个随机数据的数组
-        int[] arr = new int[100000];
-        for (int i = 0; i < 100000; i++) {
-            arr[i] = (int) (Math.random() * 800000); //数据生成区间[0, 100000)
+//        int[] arr = new int[100000];
+//        for (int i = 0; i < 100000; i++) {
+//            arr[i] = (int) (Math.random() * 800000); //数据生成区间[0, 100000)
+//        }
+//
+//        //排序100000条数据用时18
+//        long t3 = System.currentTimeMillis();
+//        QuickSortTest.quickSort(arr, 0, arr.length - 1);
+//        long t4 = System.currentTimeMillis();
+//        System.out.println(t4 - t3);
+        quickSort(arr, 0, arr.length - 1);
+        for (int num : arr) {
+            System.out.print(num + " " );
         }
-
-        //排序100000条数据用时18
-        long t3 = System.currentTimeMillis();
-        QuickSortTest.quickSort(arr, 0, arr.length - 1);
-        long t4 = System.currentTimeMillis();
-        System.out.println(t4 - t3);
     }
 
     public static void quickSort(int[] arr, int left, int right) {
