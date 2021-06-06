@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,18 +9,18 @@ import java.util.List;
  * @Description:
  */
 public class Practice3 {
-    public int removeDuplicates(int[] nums) {
-        if (nums == null || nums.length == 0) return 0;
-        int fast = 1;
-        int slow = 0;
-        while (fast < nums.length) {
-            if (nums[slow] != nums[fast]) {
-                slow++;
-                nums[slow] = nums[fast];
-
+    public int lengthOfLongestSubstring(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        int res = 0;
+        int start = 0;
+        for (int end = 0; end < s.length(); end++) {
+            char c = s.charAt(end);
+            if (map.containsKey(c)) {
+                start = Math.max(start, map.get(c));
             }
-            fast++;
+            res = Math.max(res, end - start + 1);
+            map.put(c, end);
         }
-        return slow + 1;
+        return res;
     }
 }
