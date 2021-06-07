@@ -13,26 +13,24 @@ public class LeetCode_25 {
         ListNode tail = head;
         for (int i = 0; i < k; i++) {
             if (tail == null) {
-                return head;
+                return null;
             }
             tail = tail.next;
         }
-        ListNode newHead = reverseList(head, tail);
-        reverseKGroup(tail, k);
+        ListNode newHead = reverser(head, tail);
+        head.next = reverseKGroup(tail, k);
         return newHead;
     }
 
-    private ListNode reverseList(ListNode head, ListNode tail) {
+    private ListNode reverser(ListNode head, ListNode tail) {
+        ListNode prev = null;
         ListNode cur = head;
-        ListNode pre = null;
         while (cur != tail) {
             ListNode temp = cur.next;
-            cur.next = pre;
-            pre = cur;
+            cur.next = prev;
+            prev = cur;
             cur = temp;
         }
-        return pre;
+        return prev;
     }
-
-
 }
