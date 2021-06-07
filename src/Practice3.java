@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -8,31 +9,16 @@ import java.util.List;
  * @Description:
  */
 public class Practice3 {
-    public ListNode reverseKGroup(ListNode head, int k) {
-        if (head == null || head.next == null) {
-            return head;
-        }
-        ListNode tail = head;
-        for (int i = 0; i < k; i++) {
-            if (tail == null) {
-                return null;
+    public int maxProfit(int[] prices) {
+        int minPrice = Integer.MAX_VALUE;
+        int profit = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (minPrice > prices[i]) {
+                minPrice = prices[i];
+            } else if (prices[i] - minPrice > profit) {
+                profit = prices[i] - minPrice;
             }
-            tail = tail.next;
         }
-        ListNode newHead = reverser(head, tail);
-        head.next = reverseKGroup(tail, k);
-        return newHead;
-    }
-
-    private ListNode reverser(ListNode head, ListNode tail) {
-        ListNode prev = null;
-        ListNode cur = head;
-        while (cur != tail) {
-            ListNode temp = cur.next;
-            cur.next = prev;
-            prev = cur;
-            cur = temp;
-        }
-        return prev;
+        return profit;
     }
 }
