@@ -7,26 +7,10 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Description:
  */
 public class LRUCache<V> {
-    /**
-     * 容量
-     */
     private int capacity = 1024;
-
-    /**
-     * node记录表
-     */
     private Map<String, ListNode<String, V>> table = new ConcurrentHashMap<>();
-
-    /**
-     * 双向链表头部
-     */
     private ListNode<String, V> head;
-
-    /**
-     * 双向链表尾部
-     */
     private ListNode<String, V> tail;
-
     public LRUCache() {
         head = new ListNode<>();
         tail = new ListNode<>();
@@ -46,7 +30,7 @@ public class LRUCache<V> {
         }
         node.prev.next = node.next;
         node.next.prev = node.prev;
-        head.next = node.next;
+        node.next = head.next;
         node.next.prev = node;
         head.next = node;
         node.prev = head;
@@ -58,7 +42,7 @@ public class LRUCache<V> {
         ListNode<String, V> node = table.get(key);
         if (node == null) {
             if (table.size() == capacity) {
-                table.remove(tail.prev, key);
+                table.remove(key);
                 tail.prev.prev.next = tail;
                 tail.next = null;
             }
@@ -70,21 +54,22 @@ public class LRUCache<V> {
         node.value = value;
         head.next = node.next;
         node.next.prev = node;
-        node.prev = head;
         head.next = node;
+        node.prev = head;
     }
 
 
-    public static class ListNode<K, V> {
+    private static class ListNode<K, V> {
         private K key;
         private V value;
-        ListNode<K, V> prev;
-        ListNode<K, V> next;
-        public ListNode(){
+        private ListNode<K, V> prev;
+        private ListNode<K, V> next;
+
+        private ListNode() {
 
         }
 
-        public ListNode(K key, V value) {
+        private ListNode(K key, V value) {
             this.key = key;
             this.value = value;
         }
