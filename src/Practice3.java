@@ -8,15 +8,24 @@ import java.util.List;
  * @Description:
  */
 public class Practice3 {
-    public boolean isValidBST(TreeNode root) {
-        return dfs(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
-    }
-
-    private boolean dfs(TreeNode root, int lower, int upper) {
-        if (root == null) return true;
-        if (root.val <= lower || root.val >= upper) return false;
-        boolean b1 = dfs(root.left, lower, root.val);
-        boolean b2 = dfs(root.right, root.val, upper);
-        return b1 && b2;
+    public int[] singleNumbers(int[] nums) {
+        int k = 0;
+        for (int num : nums) {
+            k ^= num;
+        }
+        int mask = 1;
+        while ((mask & k) == 0) {
+            mask <<= 1;
+        }
+        int a = 0;
+        int b = 0;
+        for (int num : nums) {
+            if ((mask & num) == 0) {
+                a ^= num;
+            } else {
+                b ^= num;
+            }
+        }
+        return new int[]{a, b};
     }
 }
