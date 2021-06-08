@@ -8,22 +8,15 @@ import java.util.List;
  * @Description:
  */
 public class Practice3 {
-    public void reorderList(ListNode head) {
-        List<ListNode> list = new ArrayList<>();
-        while (head != null) {
-            list.add(head);
-            head = head.next;
-        }
-        int left = 0, right = list.size() - 1;
-        while (left < right) {
-            list.get(left).next = list.get(right);
-            left++;
-            if (left == right) {
-                break;
-            }
-            list.get(right).next = list.get(left);
-            right--;
-        }
-        list.get(left).next = null;
+    public boolean isValidBST(TreeNode root) {
+        return dfs(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private boolean dfs(TreeNode root, int lower, int upper) {
+        if (root == null) return true;
+        if (root.val <= lower || root.val >= upper) return false;
+        boolean b1 = dfs(root.left, lower, root.val);
+        boolean b2 = dfs(root.right, root.val, upper);
+        return b1 && b2;
     }
 }

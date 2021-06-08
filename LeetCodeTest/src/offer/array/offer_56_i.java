@@ -6,7 +6,6 @@ package offer.array;
  * @Description: 力扣剑指offer #56-i  数组中数字出现的次数
  */
 public class offer_56_i {
-
     public int[] singleNumbers(int[] nums) {
         int k = 0;
         for (int num : nums) {
