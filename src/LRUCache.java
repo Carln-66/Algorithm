@@ -11,25 +11,25 @@ public class LRUCache<V> {
     private Map<String, ListNode<String, V>> table = new ConcurrentHashMap<>();
     private ListNode<String, V> head;
     private ListNode<String, V> tail;
+
     public LRUCache() {
         head = new ListNode<>();
         tail = new ListNode<>();
         head.next = tail;
         tail.prev = head;
+        head.prev = null;
+        tail.next = null;
     }
 
     public LRUCache(int capacity) {
-        this();
         this.capacity = capacity;
     }
 
     public V get(String key) {
         ListNode<String, V> node = table.get(key);
-        if (node == null) {
-            return null;
-        }
-        node.prev.next = node.next;
+        if (node == null) return null;
         node.next.prev = node.prev;
+        node.prev.next = node.next;
         node.next = head.next;
         node.next.prev = node;
         head.next = node;
@@ -41,10 +41,10 @@ public class LRUCache<V> {
     public void put(String key, V value) {
         ListNode<String, V> node = table.get(key);
         if (node == null) {
-            if (table.size() == capacity) {
+            if (capacity == table.size()) {
                 table.remove(key);
                 tail.prev.prev.next = tail;
-                tail.next = null;
+                tail.prev = tail.prev.prev;
             }
             node = new ListNode<>();
             node.key = key;
@@ -52,7 +52,7 @@ public class LRUCache<V> {
             table.put(key, node);
         }
         node.value = value;
-        head.next = node.next;
+        node.next = head.next;
         node.next.prev = node;
         head.next = node;
         node.prev = head;
@@ -62,16 +62,18 @@ public class LRUCache<V> {
     private static class ListNode<K, V> {
         private K key;
         private V value;
-        private ListNode<K, V> prev;
-        private ListNode<K, V> next;
+        ListNode<K, V> prev;
+        ListNode<K, V> next;
 
-        private ListNode() {
+        public ListNode() {
 
         }
 
-        private ListNode(K key, V value) {
+        public ListNode(K key, V value) {
             this.key = key;
             this.value = value;
         }
     }
+
+
 }

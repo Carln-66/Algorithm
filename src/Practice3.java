@@ -1,31 +1,26 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Scanner;
 
-/**
- * @Auther: Carl
- * @Date: 2021/06/06/9:38
- * @Description:
- */
 public class Practice3 {
-    public int[] singleNumbers(int[] nums) {
-        int k = 0;
-        for (int num : nums) {
-            k ^= num;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
         }
-        int mask = 1;
-        while ((mask & k) == 0) {
-            mask <<= 1;
+        return buildTreeHelper(preorder, 0, preorder.length, inorder, 0, inorder.length, map);
+    }
+
+    private TreeNode buildTreeHelper(int[] preorder, int p_start, int p_end, int[] inorder, int i_start, int i_end, HashMap<Integer, Integer> map) {
+        if (p_start == p_end) {
+            return null;
         }
-        int a = 0;
-        int b = 0;
-        for (int num : nums) {
-            if ((mask & num) == 0) {
-                a ^= num;
-            } else {
-                b ^= num;
-            }
-        }
-        return new int[]{a, b};
+        int root_val = preorder[p_start];
+        TreeNode root = new TreeNode(root_val);
+        int i_root_index = map.get(root_val);
+        int leftNum = i_root_index - i_start;
+        root.left = buildTreeHelper(preorder, p_start + 1, p_start + leftNum + 1, inorder, i_start, i_root_index, map);
+        root.right = buildTreeHelper(preorder, p_start+ leftNum + 1, p_end, inorder, i_root_index + 1, i_end, map);
+
+        return root;
     }
 }

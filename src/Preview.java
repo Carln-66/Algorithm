@@ -16,21 +16,21 @@ public class Preview {
         for (int i = 0; i < nums.length; i++) {
             boolean flag = true;
             for (int j = 0; j < nums.length - 1; j++) {
-                if (nums[j] > nums[j + 1]) {
+                if (nums[j + 1] < nums[j]) {
                     int temp = nums[j];
                     nums[j] = nums[j + 1];
                     nums[j + 1] = temp;
                     flag = false;
                 }
             }
-            if (flag) break;
+            if (flag) {
+                break;
+            }
         }
     }
 
     public static void quickSort(int[] nums, int left, int right) {
-        if (left >= right) {
-            return;
-        }
+        if (left >= right) return;
         int l = left;
         int r = right;
         int pivot = nums[l];
@@ -68,8 +68,8 @@ public class Preview {
     }
 
     public static void mergeSort(int[] nums, int left, int right) {
-        int mid = (left + right) / 2;
         if (left < right) {
+            int mid = (left + right) >> 1;
             mergeSort(nums, left, mid);
             mergeSort(nums, mid + 1, right);
             merge(nums, left, mid, right);
@@ -82,7 +82,7 @@ public class Preview {
         int[] temp = new int[right - left + 1];
         int k = 0;
         while (l <= mid && r <= right) {
-            if (nums[l] < nums[r]) {
+            if (l < r && nums[l] < nums[r]) {
                 temp[k++] = nums[l++];
             } else {
                 temp[k++] = nums[r++];
@@ -114,7 +114,7 @@ public class Preview {
     }
 
     public static void selectSort(int[] nums) {
-        for (int i = 0; i < nums.length - 1; i++) {
+        for (int i = 0; i < nums.length; i++) {
             int min = nums[i];
             int index = i;
             for (int j = i + 1; j < nums.length; j++) {
@@ -131,11 +131,9 @@ public class Preview {
     }
 
     public static void heapSort(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return;
-        }
+        if (nums == null || nums.length == 0) return;
         int len = nums.length;
-        buildMaxHeap(nums, len);
+        buildHeap(nums, len);
         for (int i = len - 1; i > 0; i--) {
             swap(nums, 0, i);
             len--;
@@ -143,31 +141,31 @@ public class Preview {
         }
     }
 
-    private static void buildMaxHeap(int[] nums, int len) {
+    private static void buildHeap(int[] nums, int len) {
         for (int i = (int) Math.floor(len / 2) - 1; i >= 0; i--) {
             heapify(nums, i, len);
         }
     }
 
     private static void heapify(int[] nums, int i, int len) {
-        int left = 2 * i + 1;
-        int right = 2 * i + 2;
-        int largestIndex = i;
-        if (left < len && nums[largestIndex] < nums[left]) {
-            largestIndex = left;
+        int left = i * 2 + 1;
+        int right = i * 2 + 2;
+        int maxIndex = i;
+        if (left < len && nums[left] > nums[maxIndex]) {
+            maxIndex = left;
         }
-        if (right < len && nums[largestIndex] < nums[right]) {
-            largestIndex = right;
+        if (right < len && nums[right] > nums[maxIndex]) {
+            maxIndex = right;
         }
-        if (largestIndex != i) {
-            swap(nums, i, largestIndex);
-            heapify(nums, largestIndex, len);
+        if (maxIndex != i) {
+            swap(nums, i, maxIndex);
+            heapify(nums, maxIndex, len);
         }
     }
 
-    private static void swap(int[] nums, int i, int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
+    private static void swap(int[] nums, int a, int b) {
+        int temp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = temp;
     }
 }
