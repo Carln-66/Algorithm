@@ -74,6 +74,4 @@ public class LRUCache<V> {
             this.value = value;
         }
     }
-
-
 }

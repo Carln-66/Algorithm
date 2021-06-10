@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class Main1 {
 
 
     /*请完成下面这个函数，实现题目要求的功能
@@ -27,23 +27,28 @@ public class Main {
             preWord = " again";
             word = word.substring(2);
             String s = unwangdulize(word);
-            word = preWord + s;
+            word = s + preWord;
         } else if (word.startsWith("un")) {
             preWord = "not ";
             word = word.substring(2);
             String s = unwangdulize(word);
-            word = s + preWord;
+            word = preWord + s;
         } else {
             if (word.endsWith("er")) {
-                word = "one who " + word.substring(0, word.length() - 2) + "s";
+                word = unwangdulize(word.substring(0, word.length() - 2));
+                word = "one who " + word + "s";
             } else if (word.endsWith("ing")) {
-                word = "to activity " + word.substring(0, word.length() - 3);
+                word = unwangdulize(word.substring(0, word.length() - 3));
+                word = "to activity " + word;
             } else if (word.endsWith("ize")) {
-                word = "change into " + word.substring(0, word.length() - 3);
+                word = unwangdulize(word.substring(0, word.length() - 3));
+                word = "change into " + word;
             } else if (word.endsWith("tion")) {
-                word = "the process of " + word.substring(0, word.length() - 4) + "ing";
+                word = unwangdulize(word.substring(0, word.length() - 4));
+                word = "the process of " + word + "ing";
             } else if (word.endsWith("ful")) {
-                word = "full of " + word.substring(0, word.length() - 3);
+                unwangdulize(word.substring(0, word.length() - 3));
+                word = "full of " + word;
             }
         }
         return word;
