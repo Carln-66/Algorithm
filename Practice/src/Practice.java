@@ -1,4 +1,4 @@
-public class Practice3 {
+public class Practice {
     public int trap(int[] height) {
         int max_left = 0;
         int max_right = 0;
