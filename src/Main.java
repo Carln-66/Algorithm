@@ -1,69 +1,46 @@
 import java.util.Scanner;
 
 public class Main {
-
-
-    /*请完成下面这个函数，实现题目要求的功能
-    当然，你也可以不按照下面这个模板来作答，完全按照自己的想法来 ^-^
-    ******************************开始写代码******************************/
-    static String unwangdulize(String word) {
-        String preWord;
-        if (word.startsWith("anti")) {
-            preWord = "against ";
-            word = word.substring(4);
-            String s = unwangdulize(word);
-            word = preWord + s;
-        } else if (word.startsWith("post")) {
-            preWord = "after ";
-            word = word.substring(4);
-            String s = unwangdulize(word);
-            word = preWord + s;
-        } else if (word.startsWith("pre")) {
-            preWord = "before ";
-            word = word.substring(3);
-            String s = unwangdulize(word);
-            word = preWord + s;
-        } else if (word.startsWith("re")) {
-            preWord = " again";
-            word = word.substring(2);
-            String s = unwangdulize(word);
-            word = preWord + s;
-        } else if (word.startsWith("un")) {
-            preWord = "not ";
-            word = word.substring(2);
-            String s = unwangdulize(word);
-            word = s + preWord;
-        } else {
-            if (word.endsWith("er")) {
-                word = "one who " + word.substring(0, word.length() - 2) + "s";
-            } else if (word.endsWith("ing")) {
-                word = "to activity " + word.substring(0, word.length() - 3);
-            } else if (word.endsWith("ize")) {
-                word = "change into " + word.substring(0, word.length() - 3);
-            } else if (word.endsWith("tion")) {
-                word = "the process of " + word.substring(0, word.length() - 4) + "ing";
-            } else if (word.endsWith("ful")) {
-                word = "full of " + word.substring(0, word.length() - 3);
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int group = scanner.nextInt();
+        int[] res = new int[group];
+        for (int i = 0; i < group; i++) {
+            int rows = scanner.nextInt();
+            int columns = scanner.nextInt();
+            String[][] map = new String[rows][columns];
+            for (int j = 0; j < rows; j++) {
+                for (int k = 0; k < columns; k++) {
+                    map[i][j] = scanner.next();
+                }
             }
+            res[i] = getShortestTrack(map);
         }
-        return word;
+        for (int num : res) {
+            System.out.println(num);
+        }
     }
 
-    /******************************结束写代码******************************/
-
-
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        String res;
-
-        String _word;
-        try {
-            _word = in.nextLine();
-        } catch (Exception e) {
-            _word = null;
+    private static int getShortestTrack(String[][] map) {
+        int res = 0;
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[0].length; j++) {
+                if (map[i][j].equals("@")) {
+                    trace(map, i, j);
+                    res++;
+                }
+            }
         }
+        return res;
+    }
 
-        res = unwangdulize(_word);
-        System.out.println(res);
+    private static void trace(String[][] map, int row, int column) {
+        if (row > map.length || column > map[0].length || row < 0 || column < 0) return;
+        if (!map[row][column].equals(".")) return;
+        map[row][column] = "X";
+        trace(map, row + 1, column);
+        trace(map, row, column + 1);
+        trace(map, row - 1, column);
+        trace(map, row, column + 1);
     }
 }

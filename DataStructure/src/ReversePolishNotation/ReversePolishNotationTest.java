@@ -14,7 +14,7 @@ public class ReversePolishNotationTest {
         //假定一个目标表达式
         //(3+4)*5-6 -> 3 4 + 5 * 6 -
         //为了说明方便，逆波兰表达式数字与符号之间使用空格隔开
-        String suffixExpression = "3 4 + 5 * 6 -";
+        String suffixExpression = "4 13 5 / +";
         /**
          * 思路：
          * 1. 先将需要运算的"3 4 + 5 * 6 -"放入ArrayList中

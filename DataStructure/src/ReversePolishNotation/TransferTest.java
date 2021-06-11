@@ -14,16 +14,13 @@ public class TransferTest {
 
         //将中缀表达式转为后缀表达式
 
-
         //演示示例：1+((2+3)*4)-5 -> 1 2 3 + 4 * 5 -
         //由于对str直接操作不方便，所以先将1+((2+3)*4)-5表达式的中缀形式每个元素依次存入对应的ArrayList中
-        String expression = "1+((2+3)*4)-5";
+        String expression = "1+((2+33)*4)-5";
         List<String> strings = toInfixExpression(expression);
         System.out.println(strings);
-        System.out.println(parseSuffixExpressionList(strings));
-//        System.out.println(calculate(parseSuffixExpressionList(strings)));
-
-
+//        System.out.println(parseSuffixExpressionList(strings));
+        System.out.println(calculate(parseSuffixExpressionList(strings)));
 
         //假定一个目标表达式
         //(3+4)*5-6 -> 3 4 + 5 * 6 -
@@ -106,16 +103,16 @@ public class TransferTest {
     }
 
 
-    //将逆波兰表达式中的数据和运算符依次放入ArrayList中
-    public static List<String> getListString(String suffixExpression) {
-        //分割suffixExpression
-        String[] split = suffixExpression.split(" ");
-        ArrayList<String> arrayList = new ArrayList<>();
-        for (String elements : split) {
-            arrayList.add(elements);
-        }
-        return arrayList;
-    }
+//    //将逆波兰表达式中的数据和运算符依次放入ArrayList中
+//    public static List<String> getListString(String suffixExpression) {
+//        //分割suffixExpression
+//        String[] split = suffixExpression.split(" ");
+//        ArrayList<String> arrayList = new ArrayList<>();
+//        for (String elements : split) {
+//            arrayList.add(elements);
+//        }
+//        return arrayList;
+//    }
 
     //完成对逆波兰表达式的运算
     /*

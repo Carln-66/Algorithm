@@ -1,26 +1,27 @@
-import java.util.HashMap;
-import java.util.Scanner;
-
 public class Practice3 {
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < inorder.length; i++) {
-            map.put(inorder[i], i);
+    public int trap(int[] height) {
+        int max_left = 0;
+        int max_right = 0;
+        int left = 1;
+        int right = height.length - 2;
+        int sum = 0;
+        for (int i = 0; i < height.length - 1; i++) {
+            if (height[left - 1] < height[right + 1]) {
+                max_left = Math.max(height[left - 1], max_left);
+                int min = max_left;
+                if (min > height[left]) {
+                    sum += min - height[left];
+                }
+                left++;
+            } else {
+                max_right = Math.max(height[right + 1], max_right);
+                int min = max_right;
+                if (min > height[right]) {
+                    sum += min - height[right];
+                }
+                right--;
+            }
         }
-        return buildTreeHelper(preorder, 0, preorder.length, inorder, 0, inorder.length, map);
-    }
-
-    private TreeNode buildTreeHelper(int[] preorder, int p_start, int p_end, int[] inorder, int i_start, int i_end, HashMap<Integer, Integer> map) {
-        if (p_start == p_end) {
-            return null;
-        }
-        int root_val = preorder[p_start];
-        TreeNode root = new TreeNode(root_val);
-        int i_root_index = map.get(root_val);
-        int leftNum = i_root_index - i_start;
-        root.left = buildTreeHelper(preorder, p_start + 1, p_start + leftNum + 1, inorder, i_start, i_root_index, map);
-        root.right = buildTreeHelper(preorder, p_start+ leftNum + 1, p_end, inorder, i_root_index + 1, i_end, map);
-
-        return root;
+        return sum;
     }
 }
