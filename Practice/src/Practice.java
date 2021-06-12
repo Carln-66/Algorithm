@@ -1,40 +1,79 @@
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.Map;
 
 public class Practice {
-    public List<List<String>> partition(String s) {
-        List<List<String>> res = new ArrayList<>();
-        int len = s.length();
-        if (len == 0) {
-            return res;
+    class ListNode {
+        private int key;
+        private int value;
+        private ListNode prev;
+        private ListNode next;
+
+        public ListNode() {
         }
-        Deque<String> path = new ArrayDeque<>();
-        char[] chars = s.toCharArray();
-        boolean[][] dp = new boolean[len][len];
-        for (int right = 0; right < len; right++) {
-            for (int left = 0; left <= right; left++) {
-                if (chars[left] == chars[right] && ( right - left <= 2 || dp[left + 1][right - 1])) {
-                    dp[left][right] = true;
-                }
-            }
+
+        public ListNode(int key, int value) {
+            this.key = key;
+            this.value = value;
         }
-        dfs(res, path, 0, dp, len, s);
-        return res;
     }
 
-    private void dfs(List<List<String>> res, Deque<String> path, int layer, boolean[][] dp, int len, String s) {
-        if (layer == len) {
-            res.add(new ArrayList<>(path));
-            return;
+    private int size;
+    private int capacity;
+    private Map<Integer, ListNode> cache;
+    private ListNode head;
+    private ListNode tail;
+
+    public Practice(int capacity) {
+        this.size = 0;
+        this.capacity = capacity;
+        head = new ListNode();
+        tail = new ListNode();
+        head.next = tail;
+        tail.prev = head;
+    }
+
+    public int get(int key) {
+        ListNode node = cache.get(key);
+        if (node == null) {
+            throw new RuntimeException("当前缓存中无该值");
         }
-        for (int i = layer; i < len; i++) {
-            if (dp[layer][i]) {
-                path.addLast(s.substring(layer, i + 1));
-                dfs(res, path, i + 1, dp, len, s);
-                path.removeLast();
+        removeNode(node);
+        addToHead(node);
+        return node.value;
+    }
+
+    public void put(int key, int value) {
+        ListNode node = cache.get(key);
+        if (node == null) {
+            ListNode newNode = new ListNode(key, value);
+            cache.put(key, newNode);
+            addToHead(newNode);
+            ++size;
+            if (size >= capacity) {
+                ListNode tailNode = removeTail();
+                cache.remove(tailNode.key);
+                --size;
             }
+        } else {
+            removeNode(node);
+            addToHead(node);
         }
+    }
+
+    public void removeNode(ListNode node) {
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+    }
+
+    public void addToHead(ListNode node) {
+        node.next = head.next;
+        node.next.prev = node;
+        head.next = node;
+        node.prev = head;
+    }
+
+    public ListNode removeTail() {
+        ListNode prevNode = tail.prev;
+        removeNode(prevNode);
+        return prevNode;
     }
 }
