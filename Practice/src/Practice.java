@@ -1,79 +1,18 @@
-import java.util.Map;
+import java.util.HashMap;
 
 public class Practice {
-    class ListNode {
-        private int key;
-        private int value;
-        private ListNode prev;
-        private ListNode next;
-
-        public ListNode() {
-        }
-
-        public ListNode(int key, int value) {
-            this.key = key;
-            this.value = value;
-        }
-    }
-
-    private int size;
-    private int capacity;
-    private Map<Integer, ListNode> cache;
-    private ListNode head;
-    private ListNode tail;
-
-    public Practice(int capacity) {
-        this.size = 0;
-        this.capacity = capacity;
-        head = new ListNode();
-        tail = new ListNode();
-        head.next = tail;
-        tail.prev = head;
-    }
-
-    public int get(int key) {
-        ListNode node = cache.get(key);
-        if (node == null) {
-            throw new RuntimeException("当前缓存中无该值");
-        }
-        removeNode(node);
-        addToHead(node);
-        return node.value;
-    }
-
-    public void put(int key, int value) {
-        ListNode node = cache.get(key);
-        if (node == null) {
-            ListNode newNode = new ListNode(key, value);
-            cache.put(key, newNode);
-            addToHead(newNode);
-            ++size;
-            if (size >= capacity) {
-                ListNode tailNode = removeTail();
-                cache.remove(tailNode.key);
-                --size;
+    public int lengthOfLongestSubstring(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        int start = 0;
+        int res = 0;
+        for (int end = 0; end < s.length(); end++) {
+            char c = s.charAt(end);
+            if (map.containsKey(c)) {
+                start = Math.max(start, map.get(c) + 1);
             }
-        } else {
-            removeNode(node);
-            addToHead(node);
+            res = Math.max(res, end - start + 1);
+            map.put(c, end);
         }
-    }
-
-    public void removeNode(ListNode node) {
-        node.prev.next = node.next;
-        node.next.prev = node.prev;
-    }
-
-    public void addToHead(ListNode node) {
-        node.next = head.next;
-        node.next.prev = node;
-        head.next = node;
-        node.prev = head;
-    }
-
-    public ListNode removeTail() {
-        ListNode prevNode = tail.prev;
-        removeNode(prevNode);
-        return prevNode;
+        return res;
     }
 }
