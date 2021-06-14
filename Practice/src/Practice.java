@@ -1,18 +1,14 @@
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Practice {
-    public int lengthOfLongestSubstring(String s) {
-        HashMap<Character, Integer> map = new HashMap<>();
-        int start = 0;
-        int res = 0;
-        for (int end = 0; end < s.length(); end++) {
-            char c = s.charAt(end);
-            if (map.containsKey(c)) {
-                start = Math.max(start, map.get(c) + 1);
-            }
-            res = Math.max(res, end - start + 1);
-            map.put(c, end);
+    public int saleStacks(int[] prices) {
+        int price = Integer.MAX_VALUE;
+        int profit = 0;
+        for (int i = 0; i < prices.length; i++) {
+            price = Math.min(price, prices[i]);
+            profit = Math.max(profit, prices[i] - price);
         }
-        return res;
+        return profit;
     }
 }

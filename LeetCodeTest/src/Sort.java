@@ -3,7 +3,7 @@
  * @Date: 2021/03/29/18:18
  * @Description: 排序算法
  */
-public class Orders {
+public class Sort {
     public static void main(String[] args) {
         int[] nums = new int[]{1, 4, 6, 2, 3, -4, -3};
         heapSort(nums);
