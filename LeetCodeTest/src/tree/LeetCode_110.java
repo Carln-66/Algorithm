@@ -1,4 +1,11 @@
-public class Practice {
+package tree;
+
+/**
+ * @Auther: Carl
+ * @Date: 2021/06/14/14:42
+ * @Description: 平衡二叉树
+ */
+public class LeetCode_110 {
     public boolean isBalanced(TreeNode root) {
         if (root == null) {
             return true;

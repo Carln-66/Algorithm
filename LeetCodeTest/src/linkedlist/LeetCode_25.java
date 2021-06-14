@@ -40,7 +40,7 @@ public class LeetCode_25 {
         ListNode tail = head;
         for (int i = 0; i < k; i++) {
             if (tail == null) {
-                return reverse1(head, tail);
+                break;
             }
             tail = tail.next;
         }
