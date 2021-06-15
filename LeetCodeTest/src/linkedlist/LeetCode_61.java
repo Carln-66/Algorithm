@@ -7,7 +7,6 @@ package linkedlist;
  * @Description:  LeetCode #61 旋转链表
  */
 public class LeetCode_61 {
-
     public ListNode rotateRight(ListNode head, int k) {
         if (head == null || head.next == null) {    //链表中无节点或者是链表中只有一个节点直接返回
             return head;

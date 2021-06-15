@@ -3,7 +3,7 @@ package array;
 /**
  * @Auther: Carl
  * @Date: 2021/06/04/13:28
- * @Description:
+ * @Description: 数组中重复的数字
  */
 public class LeetCode_03 {
     public int findRepeatNumber(int[] nums) {
