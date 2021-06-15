@@ -3,7 +3,7 @@ package tree;
 /**
  * @Auther: Carl
  * @Date: 2021/06/08/17:52
- * @Description:
+ * @Description: 对称二叉树
  */
 public class LeetCode_101 {
     public boolean isSymmetric(TreeNode root) {

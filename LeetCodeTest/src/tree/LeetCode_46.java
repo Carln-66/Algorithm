@@ -24,7 +24,7 @@ public class LeetCode_46 {
     private void dfs(int len, List<Integer> output, List<List<Integer>> res, int first) {
         //当所有的数都填完时
         if (first == len) {
-            res.add(new ArrayList<Integer>(output));
+            res.add(new ArrayList<>(output));
         }
         for (int i = first; i < len; i++) {
             //动态维护数组
