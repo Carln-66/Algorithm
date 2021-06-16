@@ -12,14 +12,14 @@ public class SortPractice {
         }
     }
 
-    public static void bubbleSort(int[] num) {
-        for (int i = 0; i < num.length; i++) {
+    public static void bubbleSort(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
             boolean flag = true;
-            for (int j = 0; j < num.length - 1; j++) {
-                if (num[j + 1] < num[j]) {
-                    int temp = num[j];
-                    num[j] = num[j + 1];
-                    num[j + 1] = temp;
+            for (int j = 0; j < nums.length - 1; j++) {
+                if (nums[j + 1] < nums[j]) {
+                    int temp = nums[j];
+                    nums[j] = nums[j + 1];
+                    nums[j + 1] = temp;
                     flag = false;
                 }
             }
@@ -43,17 +43,17 @@ public class SortPractice {
 
     public static void selectSort(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
-            int min = nums[i];
             int index = i;
+            int value = nums[i];
             for (int j = i + 1; j < nums.length; j++) {
-                if (nums[j] < min) {
-                    min = nums[j];
+                if (nums[j] < value) {
+                    value = nums[j];
                     index = j;
                 }
             }
             if (index != i) {
                 nums[index] = nums[i];
-                nums[i] = min;
+                nums[i] = value;
             }
         }
     }
@@ -62,42 +62,14 @@ public class SortPractice {
         for (int gap = nums.length / 2; gap > 0; gap /= 2) {
             for (int i = 0; i < nums.length; i++) {
                 int index = i;
-                int value = nums[index];
-                while (index - gap >= 0 && value < nums[index - gap]) {
+                int temp = nums[i];
+                while (index - gap >= 0 && temp < nums[index - gap]) {
                     nums[index] = nums[index - gap];
                     index = index - gap;
                 }
-                nums[index] = value;
+                nums[index] = temp;
             }
         }
-    }
-
-    public static void quickSort(int[] nums, int left, int right) {
-        if (left >= right) {
-            return;
-        }
-        int l = left;
-        int r = right;
-        int pivot = nums[l];
-        while (l < r) {
-            while (l < r && nums[r] >= pivot) {
-                r--;
-            }
-            if (nums[r] < pivot) {
-                nums[l] = nums[r];
-            }
-            while (l < r && nums[l] <= pivot) {
-                l++;
-            }
-            if (nums[l] > pivot) {
-                nums[r] = nums[l];
-            }
-            if (l >= r) {
-                nums[l] = pivot;
-            }
-        }
-        quickSort(nums, left, r - 1);
-        quickSort(nums, l + 1, right);
     }
 
     public static void mergeSort(int[] nums, int left, int right) {
@@ -132,36 +104,64 @@ public class SortPractice {
         }
     }
 
+    public static void quickSort(int[] nums, int left, int right) {
+        if (left > right) {
+            return;
+        }
+        int l = left;
+        int r = right;
+        int pivot = nums[l];
+        while (l < r) {
+            while (l < r && nums[r] >= pivot) {
+                r--;
+            }
+            if (nums[r] < pivot) {
+                nums[l] = nums[r];
+            }
+            while (l < r && nums[l] <= pivot) {
+                l++;
+            }
+            if (nums[l] > pivot) {
+                nums[r] = nums[l];
+            }
+            if (l >= r) {
+                nums[l] = pivot;
+            }
+        }
+        quickSort(nums, l + 1, right);
+        quickSort(nums, left, r - 1);
+    }
+
     public static void heapSort(int[] nums) {
-        if (nums == null || nums.length == 0) return;
+        if (nums.length == 0 || nums == null) return;
         int len = nums.length;
         buildHeap(nums, len);
-        for (int i = nums.length - 1; i >= 0; i--) {
+        for (int i = len- 1; i > 0; i--) {
             swap(nums, 0, i);
             len--;
-            heapify(nums, 0, len);
+            heapify(nums, len, 0);
         }
     }
 
     private static void buildHeap(int[] nums, int len) {
-        for (int i = (int) Math.floor(nums.length / 2) - 1; i >= 0; i--) {
-            heapify(nums, i, len);
+        for (int i = (int) Math.floor(len / 2) - 1; i >= 0; i--) {
+            heapify(nums, len, i);
         }
     }
 
-    private static void heapify(int[] nums, int i, int len) {
-        int left = 2 * i + 1;
-        int right = 2 * i + 2;
+    private static void heapify(int[] nums, int len, int i) {
+        int left = i * 2 + 1;
+        int right = i * 2 + 2;
         int maxIndex = i;
-        if (left < len && nums[left] > maxIndex) {
+        if (left < len && nums[left] > nums[maxIndex]) {
             maxIndex = left;
         }
-        if (right < len && nums[right] > maxIndex) {
+        if (right < len && nums[right] > nums[maxIndex]) {
             maxIndex = right;
         }
         if (maxIndex != i) {
             swap(nums, i, maxIndex);
-            heapify(nums, maxIndex, len);
+            heapify(nums, len, maxIndex);
         }
     }
 
@@ -170,4 +170,5 @@ public class SortPractice {
         nums[i] = nums[j];
         nums[j] = temp;
     }
+
 }

@@ -1,12 +1,13 @@
+package SingletonTest;
+
 /**
  * @Auther: Carl
  * @Date: 2021/05/17/13:15
  * @Description: 线程安全单例模式
  */
 public class Singleton {
-    private volatile static Singleton instance;
-    private Singleton () {
-    }
+    private static volatile Singleton instance;
+    private Singleton(){}
     public static Singleton getInstance() {
         if (instance == null) {
             synchronized (Singleton.class) {
