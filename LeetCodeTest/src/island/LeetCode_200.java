@@ -21,13 +21,10 @@ public class LeetCode_200 {
     }
 
     private void dfs(char[][] grid, int row, int column) {
-        if (row > grid.length || column > grid[0].length || row < 0 || column < 0) {
+        if (row >= grid.length || column >= grid[0].length || row < 0 || column < 0 || grid[row][column] == '0') {
             return;
         }
-        if (grid[row][column] != '1') {
-            return;
-        }
-        grid[row][column] = '2';
+        grid[row][column] = '0';
         dfs(grid, row - 1, column);
         dfs(grid, row + 1, column);
         dfs(grid, row, column - 1);
