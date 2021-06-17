@@ -7,23 +7,20 @@ package linkedlist;
  */
 public class LeetCode_92 {
     public ListNode reverseBetween(ListNode head, int left, int right) {
-        ListNode newHead = new ListNode(0);
-        newHead.next = head;
-
-        ListNode p = newHead;
-        ListNode q = newHead.next;
-
+        ListNode res = new ListNode(0);
+        res.next = head;
+        ListNode tempHead = head;
+        ListNode tempTail = head.next;
         for (int i = 0; i < left - 1; i++) {
-            p = p.next;
-            q = q.next;
+            tempHead = tempHead.next;
+            tempTail = tempTail.next;
         }
-
         for (int i = 0; i < right - left; i++) {
-            ListNode temp = q.next;
-            q.next = temp.next;
-            temp.next = p.next;
-            p.next = temp;
+            ListNode temp = tempTail.next;
+            tempTail.next = tempTail.next.next;
+            tempHead.next = temp.next;
+            temp.next = tempTail;
         }
-        return newHead.next;
+        return res.next;
     }
 }
