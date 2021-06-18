@@ -1,32 +1,39 @@
+import java.util.Stack;
+
 public class Practice {
-    public void nextPermutation(int[] nums) {
-        int i = nums.length - 2;
-        int j = nums.length - 1;
-        while (i >= 0 && nums[i + 1] <= nums[i]) {
-            i--;
-        }
-        if (i >= 0) {
-            while (j >= 0 && nums[j] <= nums[i]) {
-                j--;
+    public int longestValidParentheses(String s) {
+        Stack<Character> stack = new Stack<>();
+        char[] chars = s.toCharArray();
+        int left = 0;
+        int right = 0;
+        int sum = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (right > left) {
+                right = left = 0;
             }
-            swap(nums, i, j);
+            if (chars[i] == '(') {
+                left++;
+            } else {
+                right++;
+            }
+            if (left == right) {
+                sum = Math.max(sum, right * 2);
+            }
         }
-        reverse(nums, i + 1);
-    }
-
-    private void reverse(int[] nums, int start) {
-        int left = start;
-        int right = nums.length - 1;
-        while (left < right) {
-            swap(nums, left, right);
-            left++;
-            right--;
+        right = left = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (left > right) {
+                right = left = 0;
+            }
+            if (chars[i] == '(') {
+                left++;
+            } else {
+                right++;
+            }
+            if (left == right) {
+                sum = Math.max(sum, left * 2);
+            }
         }
-    }
-
-    private void swap(int[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+        return sum;
     }
 }
