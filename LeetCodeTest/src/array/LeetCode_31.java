@@ -1,4 +1,11 @@
-public class Practice {
+package array;
+
+/**
+ * @Auther: Carl
+ * @Date: 2021/06/18/22:38
+ * @Description: 下一个排列
+ */
+public class LeetCode_31 {
     public void nextPermutation(int[] nums) {
         int i = nums.length - 2;
         int j = nums.length - 1;

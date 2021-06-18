@@ -1,37 +1,33 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class Main {
-    public List<String> letterCombinations(String digits) {
-        Map<Character, String> map = new HashMap<Character, String>() {{
-            put('2', "abc");
-            put('3', "def");
-            put('4', "ghi");
-            put('5', "jkl");
-            put('6', "mno");
-            put('7', "pqrs");
-            put('8', "tuv");
-            put('9', "wxyz");
-        }};
-        List<String> res = new ArrayList<>();
-        if (digits == null || digits.length() == 0) return res;
-                recur(res, digits, map, new StringBuilder(), 0);
-        return res;
+    public void nextPermutation(int[] nums) {
+        int i = nums.length - 2;
+        int j = nums.length - 1;
+        while (i >= 0 && nums[i + 1] <= nums[i]) {
+            i--;
+        }
+        if (i >= 0) {
+            while (j >= 0 && nums[j] <= nums[i]) {
+                j--;
+            }
+            swap(nums, i, j);
+        }
+        reverse(nums, i + 1);
     }
 
-    private void recur(List<String> res, String digits, Map<Character, String> map, StringBuilder sb, int level) {
-        if (level == digits.length()) {
-            res.add(sb.toString());
-            return;
-        }
-        char num = digits.charAt(level);
-        String s = map.get(num);
-        for (int i = 0; i < s.length(); i++) {
-            sb.append(s.charAt(i));
-            recur(res, digits, map, sb, level + 1);
-            sb.deleteCharAt(level);
+    private void reverse(int[] nums, int start) {
+        int left = start;
+        int right = nums.length - 1;
+        while (left < right) {
+            swap(nums, left, right);
+            left++;
+            right--;
         }
     }
+
+    private void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
 }
