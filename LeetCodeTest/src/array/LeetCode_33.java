@@ -15,7 +15,7 @@ public class LeetCode_33 {
                 return mid;
             }
             else if (nums[left] <= nums[mid]) {
-                if (target > nums[left] && target < nums[mid]) {
+                if (target >= nums[left] && target < nums[mid]) {
                     right = mid - 1;
                 } else {
                     left = mid + 1;
