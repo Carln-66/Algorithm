@@ -1,6 +1,16 @@
-import java.util.*;
+package array;
 
-public class Practice {
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
+
+/**
+ * @Auther: Carl
+ * @Date: 2021/06/19/18:10
+ * @Description: 组合总和
+ */
+public class LeetCode_39 {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> res = new ArrayList<>();
         Deque<Integer> path = new ArrayDeque<>();
