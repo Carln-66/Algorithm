@@ -1,39 +1,26 @@
-import java.util.Stack;
-
 public class Practice {
-    public int longestValidParentheses(String s) {
-        Stack<Character> stack = new Stack<>();
-        char[] chars = s.toCharArray();
+    public int search(int[] nums, int target) {
         int left = 0;
-        int right = 0;
-        int sum = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (right > left) {
-                right = left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int mid = (left + right) >> 1;
+            if (nums[mid] == target) {
+                return mid;
             }
-            if (chars[i] == '(') {
-                left++;
+            else if (nums[left] <= nums[mid]) {
+                if (target > nums[left] && target < nums[mid]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
             } else {
-                right++;
-            }
-            if (left == right) {
-                sum = Math.max(sum, right * 2);
+                if (target <= nums[right] && target > nums[mid]) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
             }
         }
-        right = left = 0;
-        for (int i = s.length() - 1; i >= 0; i--) {
-            if (left > right) {
-                right = left = 0;
-            }
-            if (chars[i] == '(') {
-                left++;
-            } else {
-                right++;
-            }
-            if (left == right) {
-                sum = Math.max(sum, left * 2);
-            }
-        }
-        return sum;
+        return -1;
     }
 }
