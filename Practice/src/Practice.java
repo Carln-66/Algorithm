@@ -1,28 +1,34 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class Practice {
-    public int minDistance(String word1, String word2) {
-        int x = word1.length();
-        int y = word2.length();
-        if (x * y == 0) {
-            return x + y;
+    public String minWindow(String s, String t) {
+        int[] need = new int[128];
+        for (int i = 0; i < t.length(); i++) {
+            need[t.charAt(i)]++;
         }
-        int[][] dp = new int[x + 1][y + 1];
-        for (int i = 0; i < x + 1; i++) {
-            dp[i][0] = i;
-        }
-        for (int i = 0; i < y + 1; i++) {
-            dp[0][i] = i;
-        }
-        for (int i = 1; i < x + 1; i++) {
-            for (int j = 1; j < y + 1; j++) {
-                int left = dp[i - 1][j] + 1;
-                int down = dp[i][j - 1] + 1;
-                int left_down = dp[i - 1][j - 1];
-                if (word1.charAt(i - 1) != word2.charAt(i - 1)) {
-                    left_down += 1;
-                }
-                dp[i][j] = Math.min(left, Math.min(down, left_down));
+        int l = 0, r = 0, size = Integer.MAX_VALUE, count = t.length(), start = 0;
+        while (r < s.length()) {
+            char c = s.charAt(r);
+            if (need[c] > 0) {
+                count--;
             }
+            need[c]--;
+            if (count == 0) {
+                while (l < r && need[s.charAt(l)] < 0) {
+                    need[s.charAt(l)]++;
+                    l++;
+                }
+                if (r - l + 1 <size) {
+                    size = r - l + 1;
+                    start = l;
+                }
+                need[s.charAt(l)]++;
+                l++;
+                count++;
+            }
+            r++;
         }
-        return dp[x][y];
+        return size == Integer.MAX_VALUE ? "" : s.substring(start, start + size);
     }
 }
