@@ -1,6 +1,11 @@
-import java.util.*;
+package tree;
 
-public class Practice {
+/**
+ * @Auther: Carl
+ * @Date: 2021/06/22/23:37
+ * @Description: 二叉树展开为链表
+ */
+public class LeetCode_114 {
     public void flatten(TreeNode root) {
         while (root != null) {
             if (root.left == null) {

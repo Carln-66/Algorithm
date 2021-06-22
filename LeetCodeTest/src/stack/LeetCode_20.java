@@ -17,7 +17,6 @@ class LeetCode_20 {
 
     public static boolean result(String s) {
         Stack<Character> stack = new Stack<>();
-
         if (s.length() % 2 == 0) {
             for (int i = 0; i < s.length(); i++) {
                 char c = s.charAt(i);
