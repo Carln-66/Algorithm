@@ -1,4 +1,11 @@
-public class Practice {
+package strings;
+
+/**
+ * @Auther: Carl
+ * @Date: 2021/06/23/16:11
+ * @Description: 解码方法
+ */
+public class LeetCode_91 {
     public int numDecodings(String s) {
         int len = s.length();
         int[] dp = new int[len + 1];
