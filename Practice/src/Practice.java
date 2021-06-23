@@ -1,16 +1,34 @@
+import java.util.*;
+
 public class Practice {
-    public int numDecodings(String s) {
-        int len = s.length();
-        int[] dp = new int[len + 1];
-        dp[0] = 1;
-        for (int i = 1; i <= s.length(); i++) {
-            if (s.charAt(i - 1) != '0') {
-                dp[i] += dp[i - 1];
-            }
-            if (i > 1 && s.charAt(i - 2) != '0' && (s.charAt(i - 2) - '0') * 10 + s.charAt(i - 1) - '0' <= 26) {
-                dp[i] += dp[i - 2];
-            }
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode fast = head.next;
+        ListNode slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
         }
-        return dp[len];
+        ListNode temp = slow.next;
+        slow.next = null;
+        ListNode l1 = sortList(head);
+        ListNode l2 = sortList(temp);
+        ListNode res = new ListNode(0);
+        merge(res, l1, l2);
+        return res.next;
+    }
+
+    private void merge(ListNode res, ListNode left, ListNode right) {
+        while (left != null && right != null) {
+            if (left.val < right.val) {
+                res.next = left;
+                left = left.next;
+            } else {
+                res.next = right;
+                right = right.next;
+            }
+            res = res.next;
+        }
+        res.next = left != null ? left : right;
     }
 }
