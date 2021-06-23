@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class LRUCache {
 
-    class DLinkedNode {
+    static class DLinkedNode {
         int key;
         int value;
         DLinkedNode prev;
