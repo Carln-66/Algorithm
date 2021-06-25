@@ -5,8 +5,8 @@
  */
 public class SortPractice {
     public static void main(String[] args) {
-        int[] nums = new int[]{1, 4, 6, 2, 3, -4, -3};
-        heapSort(nums);
+        int[] nums = new int[]{2, 5, 1, -5, 3, 9, 4};
+        mergeSort(nums, 0, nums.length - 1);
         for (int num : nums) {
             System.out.print(num + " ");
         }
@@ -74,7 +74,7 @@ public class SortPractice {
 
     public static void mergeSort(int[] nums, int left, int right) {
         if (left < right) {
-            int mid = (left + right) >> 1;
+            int mid = left + (right - left) / 2;
             mergeSort(nums, left, mid);
             mergeSort(nums, mid + 1, right);
             merge(nums, left, mid, right);
@@ -109,19 +109,19 @@ public class SortPractice {
             return;
         }
         int l = left;
-        int r = right;
+        int r= right;
         int pivot = nums[l];
         while (l < r) {
             while (l < r && nums[r] >= pivot) {
                 r--;
             }
-            if (nums[r] < pivot) {
+            if (l < r) {
                 nums[l] = nums[r];
             }
             while (l < r && nums[l] <= pivot) {
                 l++;
             }
-            if (nums[l] > pivot) {
+            if (l < r) {
                 nums[r] = nums[l];
             }
             if (l >= r) {
