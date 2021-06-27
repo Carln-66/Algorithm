@@ -1,33 +1,18 @@
 public class Main {
-    public void nextPermutation(int[] nums) {
-        int i = nums.length - 2;
-        int j = nums.length - 1;
-        while (i >= 0 && nums[i + 1] <= nums[i]) {
-            i--;
-        }
-        if (i >= 0) {
-            while (j >= 0 && nums[j] <= nums[i]) {
-                j--;
-            }
-            swap(nums, i, j);
-        }
-        reverse(nums, i + 1);
+    int maxSum = Integer.MIN_VALUE;
+    public int maxPathSum(TreeNode root) {
+        dfs(root);
+        return maxSum;
     }
 
-    private void reverse(int[] nums, int start) {
-        int left = start;
-        int right = nums.length - 1;
-        while (left < right) {
-            swap(nums, left, right);
-            left++;
-            right--;
+    private int dfs(TreeNode root) {
+        if (root == null) {
+            return 0;
         }
+        int leftMax = Math.max(dfs(root.left), 0);
+        int rightMax = Math.max(dfs(root.right), 0);
+        int newSum = root.val + leftMax + rightMax;
+        maxSum = Math.max(newSum, maxSum);
+        return root.val + Math.max(leftMax, rightMax);
     }
-
-    private void swap(int[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
-
 }
