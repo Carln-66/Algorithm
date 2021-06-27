@@ -1,8 +1,15 @@
+package dynamic;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Main {
+/**
+ * @Auther: Carl
+ * @Date: 2021/06/27/16:50
+ * @Description: 单词拆分
+ */
+public class LeetCode_139 {
     public boolean wordBreak(String s, List<String> wordDict) {
         int len = s.length();
         int maxWordLen = 0;
