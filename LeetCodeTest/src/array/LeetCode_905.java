@@ -1,8 +1,11 @@
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+package array;
 
-public class Main {
+/**
+ * @Auther: Carl
+ * @Date: 2021/06/27/22:01
+ * @Description: 按奇偶排序数组
+ */
+public class LeetCode_905 {
     public int[] sortArrayByParity(int[] nums) {
         //采用原地置换
         int left = 0, right = nums.length - 1;
