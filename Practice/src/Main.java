@@ -1,20 +1,18 @@
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
-    public int[] sortArrayByParity(int[] nums) {
-        //采用原地置换
-        int left = 0, right = nums.length - 1;
-        while (left < right) {
-            if (nums[left] % 2 > nums[right] % 2) {
-                int temp = nums[left];
-                nums[left] = nums[right];
-                nums[right] = temp;
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        int start = 0;
+        int res = 0;
+        for (int end = 0; end < s.length(); end++) {
+            if (map.containsKey(s.charAt(end))) {
+                start = Math.max(start, map.get(s.charAt(end)) + 1);
             }
-            if (nums[left] % 2 == 0) left++;
-            if (nums[right] % 2 == 1) right--;
+            res = Math.max(res, end - start + 1);
+            map.put(s.charAt(end), end);
         }
-        return nums;
+        return res;
     }
 }

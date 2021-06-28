@@ -7,7 +7,6 @@ package array;
  */
 public class LeetCode_905 {
     public int[] sortArrayByParity(int[] nums) {
-        //采用原地置换
         int left = 0, right = nums.length - 1;
         while (left < right) {
             if (nums[left] % 2 > nums[right] % 2) {
