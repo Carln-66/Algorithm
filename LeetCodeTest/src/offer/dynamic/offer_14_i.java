@@ -1,6 +1,12 @@
-import java.util.*;
+package offer.dynamic;
 
-public class Main {
+/**
+ * @Auther: Carl
+ * @Date: 2021/07/03/18:56
+ * @Description: 剪绳子
+ */
+public class offer_14_i {
+    //利用动态规划解决
     public int cuttingRope(int n) {
         int[] dp = new int[n + 1];
         dp[2] = 1;
