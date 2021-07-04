@@ -1,6 +1,11 @@
-import java.util.*;
+package strings;
 
-public class Main {
+/**
+ * @Auther: Carl
+ * @Date: 2021/07/04/20:13
+ * @Description: 回文子串
+ */
+public class LeetCode_647 {
     public int countSubstrings(String s) {
         int count = 0;
         for (int i = 0; i < s.length() * 2 - 1; i++) {
