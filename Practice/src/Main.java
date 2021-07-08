@@ -1,18 +1,21 @@
 import java.util.*;
 
 public class Main {
-    public int maxProduct(int[] nums) {
-        int max = Integer.MIN_VALUE, imax = 1, imin = 1;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] < 0) {
-                int temp = imax;
-                imax = imin;
-                imin = temp;
+    public String reverseWords(String s) {
+        s.trim();
+        int fast = s.length() - 1;
+        int slow = s.length() - 1;
+        StringBuilder sb = new StringBuilder();
+        while (fast >= 0) {
+            while (fast >= 0 && s.charAt(fast) != ' ') {
+                fast--;
             }
-            imax = Math.max(imax * nums[i], nums[i]);
-            imin = Math.min(imin * nums[i], nums[i]);
-            max = Math.max(max, imax);
+            sb.append(s.substring(fast + 1, slow + 1) + " ");
+            while (fast >= 0 && s.charAt(fast) == ' ') {
+                fast--;
+            }
+            slow = fast;
         }
-        return max;
+        return sb.toString().trim();
     }
 }
