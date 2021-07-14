@@ -1,21 +1,30 @@
 import java.util.*;
 
 public class Main {
-    public String reverseWords(String s) {
-        s.trim();
-        int fast = s.length() - 1;
-        int slow = s.length() - 1;
-        StringBuilder sb = new StringBuilder();
-        while (fast >= 0) {
-            while (fast >= 0 && s.charAt(fast) != ' ') {
-                fast--;
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        System.out.print(n + "=");
+        List<Integer> list = new ArrayList<>();
+        for (int k = 2; k <= n / 2; k++) {
+            if (n % k == 0) {
+                list.add(k);
+                n /= k;
+                k = 2;
             }
-            sb.append(s.substring(fast + 1, slow + 1) + " ");
-            while (fast >= 0 && s.charAt(fast) == ' ') {
-                fast--;
-            }
-            slow = fast;
         }
-        return sb.toString().trim();
+        list.add(n);
+        int[] arr = new int[list.size()];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = list.get(i);
+        }
+        Arrays.sort(arr);
+        for (int i = 0; i < arr.length; i++) {
+            if (i == arr.length - 1) {
+                System.out.print(arr[i]);
+                return;
+            }
+            System.out.print(arr[i] + "*");
+        }
     }
 }
