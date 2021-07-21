@@ -1,17 +1,24 @@
+import java.util.HashSet;
+import java.util.Set;
+
 public class Main {
-    private volatile static Main instance;
-
-    private Main() {
-    }
-
-    public Main getInstance() {
-        if (instance == null) {
-            synchronized (Main.class) {
-                if (instance == null) {
-                    instance = new Main();
+    public int longestConsecutive(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            set.add(num);
+        }
+        int res = 0;
+        for (int num : nums) {
+            if (!set.contains(num - 1)) {
+                int curNum = num;
+                int curLen = 1;
+                while (set.contains(curNum + 1)) {
+                    curNum++;
+                    curLen++;
                 }
+                res = Math.max(res, curLen);
             }
         }
-        return instance;
+        return res;
     }
 }

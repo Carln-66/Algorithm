@@ -20,7 +20,7 @@ public class LeetCode_128 {
                 int curNum = num;
                 int curLength = 1;
                 while (set.contains(curNum + 1)) {
-                    curNum += + 1;
+                    curNum += 1;
                     curLength += 1;
                 }
                 res = Math.max(res, curLength);
