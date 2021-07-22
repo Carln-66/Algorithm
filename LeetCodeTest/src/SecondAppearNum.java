@@ -2,13 +2,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Main {
-    public static void main(String[] args) {
-        int[] arr = {2, 2, 3};
-        System.out.println(findNum(arr));
-    }
-
-    public static int findNum(int[] nums) {
+/**
+ * @Auther: Carl
+ * @Date: 2021/07/22/8:56
+ * @Description: 给定一个int数组，找出数组中出现次数第二多的数字
+ */
+public class SecondAppearNum {
+    public int findNum(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int num : nums) {
             if (map.containsKey(num)) {
