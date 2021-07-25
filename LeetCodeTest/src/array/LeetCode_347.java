@@ -27,7 +27,7 @@ public class LeetCode_347 {
         for (Integer key : map.keySet()) {
             if (pq.size() < k) {
                 pq.add(key);
-            } else if (map.get(key) > map.get(pq.peek())) {
+            } else if (map.get(key) > map.get(pq.peek())) {     //由于是最小堆若当前key比之前的小，那么取出前面key值，把新值添加进去，堆会重新平衡
                 pq.poll();
                 pq.add(key);
             }
