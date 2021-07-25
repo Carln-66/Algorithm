@@ -1,10 +1,14 @@
+package array;
+
 import java.util.*;
 
-public class Main {
-    public static void main(String[] args) {
-        int[] nums = {1,2};
-        topKFrequent(nums, 2);
-    }
+/**
+ * @Auther: Carl
+ * @Date: 2021/07/25/23:38
+ * @Description: 前K个高频元素
+ */
+public class LeetCode_347 {
+    //利用小顶堆
     public static int[] topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int j : nums) {
@@ -24,13 +28,13 @@ public class Main {
             if (pq.size() < k) {
                 pq.add(key);
             } else if (map.get(key) > map.get(pq.peek())) {
-                pq.remove();
+                pq.poll();
                 pq.add(key);
             }
         }
         List<Integer> res = new ArrayList<>();
         while (!pq.isEmpty()) {
-            res.add(pq.remove());
+            res.add(pq.poll());
         }
         int[] arr = new int[res.size()];
         for (int i = 0; i < res.size(); i++) {
