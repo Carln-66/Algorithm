@@ -1,0 +1,224 @@
+/*******第一题题解**********/
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String a = scanner.nextLine();
+        String b = scanner.nextLine();
+        b = b + b;
+        int n = a.length();
+        int m = b.length();
+        int flag = 0;
+        for (int i = 0; i < n; i++) {
+            String c = b.substring(i, i + n);
+            if (a.equals(c)) {
+                flag = 1;
+                break;
+            }
+        }
+        if (flag == 1) {
+            System.out.println("True");
+        } else {
+            System.out.println("False");
+        }
+    }
+}
+/*******第二题题解**********/
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String a = scanner.nextLine();
+        String ans1 = "";
+        String ans2 = "";
+        String ans3 = "";
+        String ans4 = "";
+        int n = a.length();
+        int flag = 2;
+        if (a.charAt(0) >= 'A' && a.charAt(0) <= 'Z') {
+            flag = 1;
+        }
+        for (int i = 0; i < n; i++) {
+            if (a.charAt(i) == '_') {
+                flag = 3;
+            }
+            if (a.charAt(i) == '-') {
+                flag = 4;
+            }
+        }
+        if (flag == 1) {
+            ans1 = a;
+            for (int i = 0; i < n; i++) {
+                if (i == 0) {
+                    ans2 += (char) (a.charAt(i) + 32);
+                    ans3 += (char) (a.charAt(i) + 32);
+                    ans4 += (char) (a.charAt(i) + 32);
+                } else {
+                    if (a.charAt(i) >= 'A' && a.charAt(i) <= 'Z') {
+                        ans2 += a.charAt(i);
+                        ans3 += '_';
+                        ans3 += (char) (a.charAt(i) + 32);
+                        ans4 += '-';
+                        ans4 += (char) (a.charAt(i) + 32);
+                    } else {
+                        ans2 += a.charAt(i);
+                        ans3 += a.charAt(i);
+                        ans4 += a.charAt(i);
+                    }
+                }
+            }
+        }
+        if (flag == 2) {
+            ans2 = a;
+            for (int i = 0; i < n; i++) {
+                if (i == 0) {
+                    ans1 += (char) (a.charAt(i) - 32);
+                    ans3 += a.charAt(i);
+                    ans4 += a.charAt(i);
+                } else {
+                    if (a.charAt(i) >= 'A' && a.charAt(i) <= 'Z') {
+                        ans1 += a.charAt(i);
+                        ans3 += '_';
+                        ans3 += (char) (a.charAt(i) + 32);
+                        ans4 += '-';
+                        ans4 += (char) (a.charAt(i) + 32);
+                    } else {
+                        ans1 += a.charAt(i);
+                        ans3 += a.charAt(i);
+                        ans4 += a.charAt(i);
+                    }
+                }
+            }
+        }
+        if (flag == 3) {
+            ans3 = a;
+            int temp = 0;
+            for (int i = 0; i < n; i++) {
+                if (i == 0) {
+                    ans1 += (char) (a.charAt(i) - 32);
+                    ans2 += a.charAt(i);
+                    ans4 += a.charAt(i);
+                } else {
+                    if (a.charAt(i) == '_') {
+                        temp = 1;
+                        ans4 += '-';
+                    } else {
+                        if (temp == 1) {
+                            ans1 += (char) (a.charAt(i) -32);
+                            ans2 += (char) (a.charAt(i) -32);
+                            ans4 += a.charAt(i);
+                            temp = 0;
+                        } else {
+                            ans1 += a.charAt(i);
+                            ans2 += a.charAt(i);
+                            ans4 += a.charAt(i);
+                        }
+                    }
+                }
+            }
+        }
+        if (flag == 4) {
+            ans4 = a;
+            int temp = 0;
+            for (int i = 0; i < n; i++) {
+                if (i == 0) {
+                    ans1 += (char) (a.charAt(i) - 32);
+                    ans2 += a.charAt(i);
+                    ans3 += a.charAt(i);
+                } else {
+                    if (a.charAt(i) == '-') {
+                        temp = 1;
+                        ans3 += '_';
+                    } else {
+                        if (temp == 1) {
+                            ans1 += (char) (a.charAt(i) -32);
+                            ans2 += (char) (a.charAt(i) -32);
+                            ans3 += a.charAt(i);
+                            temp = 0;
+                        } else {
+                            ans1 += a.charAt(i);
+                            ans2 += a.charAt(i);
+                            ans3 += a.charAt(i);
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(ans1 + " " + ans2 + " " + ans3 + " " + ans4);
+    }
+}
+/*******第三题题解**********/
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String t = scanner.nextLine();
+        String s = "";
+        for (int i = 0; i < t.length(); i++) {
+            if (t.charAt(i) != '*') {
+                s += t.charAt(i);
+            }
+        }
+        StringBuilder res = new StringBuilder();
+        int multi = 0;
+        LinkedList<Integer> stack_multi = new LinkedList<>();
+        LinkedList<String> stack_res = new LinkedList<>();
+        for (Character c : s.toCharArray()) {
+            if (c == '[') {
+                stack_multi.addLast(multi);
+                stack_res.addLast(res.toString());
+                multi = 0;
+                res = new StringBuilder();
+            } else if (c == ']') {
+                StringBuilder temp = new StringBuilder();
+                int cur_multi = stack_multi.removeLast();
+                for (int i = 0; i < cur_multi; i++) {
+                    temp.append(res);
+                }
+                res = new StringBuilder(stack_res.removeLast() + temp);
+            } else if (c >= '0' && c < '9') {
+                multi = multi * 10 + Integer.parseInt(c + "");
+            } else {
+                res.append(c);
+            }
+        }
+        System.out.println(res.toString());
+    }
+}
+/***********************Others********************************/
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int size = scanner.nextInt();
+        String finRes = "";
+        for (int i = 0; i < size; i++) {
+            int len = scanner.nextInt();
+            String s = scanner.next();
+            String res = "";
+            for (int j = 0; j < len; j++) {
+                String substring = s.substring(0, j + 1);
+                res = res + " " + maxSubArr(substring.toCharArray());
+            }
+            res = "Case #" + (i + 1) + ":" + res + "\n";
+            finRes = finRes + res;
+        }
+        System.out.println(finRes);
+    }
+
+    public static int maxSubArr(char[] s) {
+        int curLen = 1;
+        for (int i = 1; i < s.length; i++) {
+            if (s[i] > (s[i - 1])) {
+                curLen++;
+            } else {
+                curLen = 1;
+            }
+        }
+        return curLen;
+    }
+}
