@@ -1,32 +1,37 @@
 import java.util.Stack;
 
 public class Main {
-    class CQueue {
-        private Stack<Integer> stack1;
-        private Stack<Integer> stack2;
+    class MinStack {
+        Stack<Integer> stack1;
+        Stack<Integer> stack2;
 
-        public CQueue() {
+        /**
+         * initialize your data structure here.
+         */
+        public MinStack() {
             stack1 = new Stack<>();
             stack2 = new Stack<>();
         }
 
-        public void appendTail(int value) {
-            stack1.push(value);
+        public void push(int x) {
+            stack1.add(x);
+            if (stack2.isEmpty() || stack2.peek() >= x) {
+                stack2.add(x);
+            }
         }
 
-        public int deleteHead() {
-            if (stack1.isEmpty() && stack2.isEmpty()) {
-                return -1;
+        public void pop() {
+            if (stack1.pop().equals(stack2.peek())) {
+                stack2.pop();
             }
-            int res = 0;
-            if (!stack2.isEmpty()) {
-                return stack2.pop();
-            }
-            while (!stack1.isEmpty()) {
-                stack2.push(stack1.pop());
-            }
-            res = stack2.pop();
-            return res;
+        }
+
+        public int top() {
+            return stack1.peek();
+        }
+
+        public int min() {
+            return stack2.peek();
         }
     }
 }
