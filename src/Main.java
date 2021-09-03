@@ -1,37 +1,19 @@
 import java.util.Stack;
 
 public class Main {
-    class MinStack {
-        Stack<Integer> stack1;
-        Stack<Integer> stack2;
-
-        /**
-         * initialize your data structure here.
-         */
-        public MinStack() {
-            stack1 = new Stack<>();
-            stack2 = new Stack<>();
+    public int[] reversePrint(ListNode head) {
+        Stack<Integer> stack = new Stack<>();
+        ListNode temp = head;
+        int len = 0;
+        while (temp != null) {
+            len++;
+            stack.push(temp.val);
+            temp = temp.next;
         }
-
-        public void push(int x) {
-            stack1.add(x);
-            if (stack2.isEmpty() || stack2.peek() >= x) {
-                stack2.add(x);
-            }
+        int[] res = new int[len];
+        for (int i = 0; i < len; i++) {
+            res[i] = stack.pop();
         }
-
-        public void pop() {
-            if (stack1.pop().equals(stack2.peek())) {
-                stack2.pop();
-            }
-        }
-
-        public int top() {
-            return stack1.peek();
-        }
-
-        public int min() {
-            return stack2.peek();
-        }
+        return res;
     }
 }
