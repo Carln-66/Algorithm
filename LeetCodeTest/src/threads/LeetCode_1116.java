@@ -1,12 +1,17 @@
-import java.util.ArrayList;
-import java.util.List;
+package threads;
+
 import java.util.concurrent.Semaphore;
 import java.util.function.IntConsumer;
 
-public class Main {
+/**
+ * @Auther: Carl
+ * @Date: 2021/09/04/15:21
+ * @Description: 打印零与奇偶数
+ */
+public class LeetCode_1116 {
     private int n;
 
-    public Main(int n) {
+    public LeetCode_1116(int n) {
         this.n = n;
     }
 
