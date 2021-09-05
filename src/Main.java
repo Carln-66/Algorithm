@@ -4,42 +4,32 @@ import java.util.concurrent.Semaphore;
 import java.util.function.IntConsumer;
 
 public class Main {
-    private int n;
-
-    public Main(int n) {
-        this.n = n;
-    }
-
-    Semaphore z = new Semaphore(1);
-    Semaphore e = new Semaphore(0);
-    Semaphore o = new Semaphore(0);
-
-    // printNumber.accept(x) outputs "x", where x is an integer.
-    public void zero(IntConsumer printNumber) throws InterruptedException {
-        for (int i = 0; i < n; i++) {
-            z.acquire();
-            printNumber.accept(0);
-            if ((i & 1) == 0) {
-                o.release();
+    public int search(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (nums[mid] <= target) {
+                left = mid + 1;
             } else {
-                e.release();
+                right = mid - 1;
             }
         }
-    }
-
-    public void even(IntConsumer printNumber) throws InterruptedException {
-        for (int i = 2; i <= n; i += 2) {
-            e.acquire();
-            printNumber.accept(i);
-            z.release();
+        int ptrR = left;
+        if (right >= 0 && nums[right] != target) {
+            return 0;
         }
-    }
-
-    public void odd(IntConsumer printNumber) throws InterruptedException {
-        for (int i = 1; i <= n; i += 2) {
-            o.acquire();
-            printNumber.accept(i);
-            z.release();
+        left = 0;
+        right = nums.length - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
         }
+        int ptrL = right;
+        return ptrR - ptrL - 1;
     }
 }
